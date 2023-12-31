@@ -8,8 +8,55 @@
 
 {% block nonheader %}
 
+    <main>
+        <section class="vh-100 gradient-custom">
+            <div class="container py-5 h-100">
+              <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                  <div class="card text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+          
+                      <div class="mb-md-5 mt-md-4 pb-5">
+          
+                        <h2 class="fw-bold mb-2 text-black text-uppercase">Login</h2>
+                        <p class="text-black mb-5">Please enter your login and password!</p>
+                        
 
-    
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-outline form-white mb-4">
+                                <input name="username" type="text" placeholder="Kullanıcı adınızı giriniz."  style="border: 2px solid black ; width: 100%; border-radius: 15px; height: 50px;">
+                                
+                            </div>
+                            
+                            <div class="form-outline form-white mb-4">
+                                <input name="password" type="password" placeholder="Lütfen parolanızı giriniz." style="border: 2px solid black ; width: 100% ; border-radius: 15px ; height: 50px;" />
+                            </div>
+                            <div >
+                                <label class="text-black" for="">Beni Hatırla</label>
+                                <input name="rememberme" type="checkbox" placeholder="Beni Hatırla">
+                            </div>
+                            
+                            <p class="small mb-5 pb-lg-2"><a class="text-black" href="#!">Forgot password?</a></p>
+                            
+                            <button class=" btn  btn-primary  btn-lg px-5" type="submit">Login</button>
+                            
+                        </div>
+                    </form>
+                        
+                        <div>
+                            <p class="mb-0 text-black">Don't have an account? <a href="registerPage" class="text-primary fw-bold">Sign Up</a>
+                            </p>
+                      </div>
+          
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+    </main>
+
 
     
 {% endblock nonheader %}

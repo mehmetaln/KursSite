@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from appMy.views import *
+from appUser.views import *
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,8 +26,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', indexPage, name="indexPage"),
     
-    # USER
     
+    # USER
+    path('login/', loginPage, name="loginPage"),
+    path('register/', registerPage, name="registerPage")
     
     
     

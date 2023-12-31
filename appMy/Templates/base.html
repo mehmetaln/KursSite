@@ -27,8 +27,27 @@
     ></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+<style>
+    .text-bg-error{
+        background-color: rgb(218, 66, 66);
+        color: #eee ;
+      }
+</style>
 <body>
     
+    
+  <div class="position-fixed bottom-0 end-0 m-5 my-2">
+    {% for i in messages %} 
+      <div class="toast align-items-center text-bg-{{ i.tags }} border-0 fade show " role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            <p>{{ i }}</p>
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
     
     
     {% block nonheader %}
@@ -46,6 +65,10 @@
     {% include 'partials/_footer.html' %}
 
 
-
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"
+></script>
 </body>
 </html>

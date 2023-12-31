@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+
+
+
+{% block nonheader %}
+
+    <main>
+        <section class="gradient-custom" style="height: 100vh;">
+            <div class="container py-5 h-100">
+              <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                  <div class="card text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+          
+                      <div class="mb-md-5 mt-md-4 pb-5">
+          
+                        <h2 class="fw-bold mb-2 text-uppercase text-primary">Register</h2>                        
+
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-outline form-white mb-4 my-5 d-grid gap-2">
+                                <input name="fname" type="text" placeholder="Lütfen adınızı giriniz."  style="border: 2px solid black ; width: 100%; border-radius: 15px; height: 50px;">
+                                <input name="lame" type="text" placeholder="Lütfen soyadınızı giriniz."  style="border: 2px solid black ; width: 100%; border-radius: 15px; height: 50px;">
+                                <input name="ema'l" type="text" placeholder="Lütfen mail adresinizi giriniz."  style="border: 2px solid black ; width: 100%; border-radius: 15px; height: 50px;">
+                                <input name="username" type="text" placeholder="Kullanıcı adınızı giriniz."  style="border: 2px solid black ; width: 100%; border-radius: 15px; height: 50px;">                                
+                                <input name="id" type="text" placeholder="Tc Kimlik Numarası"style="border: 2px solid black ; width: 100%; border-radius: 15px; height: 50px;" >
+                                <input name="password1" type="password" placeholder="Lütfen parolanızı giriniz." style="border: 2px solid black ; width: 100% ; border-radius: 15px ; height: 50px;" />                            
+                                <input name="password2" type="password" placeholder="Lütfen parolanızı tekrar giriniz." style="border: 2px solid black ; width: 100% ; border-radius: 15px ; height: 50px;" />
+                            </div>
+                            <!-- <div class="btn-group my-3 d-flex justify-content-start">
+                                <button type="button" class="btn btn-primary dropdown-toggle"data-mdb-dropdown-init data-mdb-ripple-init aria-expanded="false">Lütfen güvenlik sorunuzu seçniz</button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                  <li><button class="dropdown-item" type="button">Action</button></li>
+                                  <li><button class="dropdown-item" type="button">Another action</button></li>
+                                  <li><button class="dropdown-item" type="button">Something else here</button></li>
+                                </ul>
+                              </div> -->                                                        
+                            <button class=" btn  btn-primary  btn-lg px-5" type="submit">Kaydol</button> 
+                        </div>
+                    </form>
+                        <div>
+                            <p class="mb-0 text-black">Zaten bir hesabınız var mı?<a href="loginPage" class="text-primary fw-bold">Login</a>
+                            </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+    </main>
+
+
+    
+{% endblock nonheader %}
+    

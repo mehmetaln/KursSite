@@ -30,49 +30,44 @@ def loginPage(request):
 
 
 
-    def registerPage(request):
-    
-        if request.method == "POST":
-            fname = request.POST.get("fname")
-            lname = request.POST.get("lname")
-            email = request.POST.get("email")
-            username = request.POST.get("username")
-            id = request.POST.get("id")
-            password1 =request.POST.get("password1")
-            password2 = request.POST.get("password2") 
-            
-            boolnum = boolup = False
-            boolchar = True
-            boolid= False
-            if fname and lname and email and username and id and password1 and password2:
-                char = ["*;:@?ı/"]    
-                if password1 == password2:
-                    for i in password1:
-                        if i.isupper():
-                            boolup = True
-                        if i.isnumeric():
-                            boolnum = True
-                        if i in char:
-                            boolchar = False
-                    for i in id:
-                        if  i.isnumeric():
-                            boolid =True
-                    if boolup and boolnum  and boolchar and len(password1)>=6 and len(id)==11:
-                        if not User.objects.filter(username = username).exists():
-                            if not User.objects.filter(email =email).exists():
-                                user = User.objects.create_user(first_name =fname, last_name = lname, email = email, password=password1)
-                                user.save()
-                                messages.success(request,"Kayıt işleminiz başarı ile tamamlandı")
-                                return redirect("loginPage")
-                            else:
-                                messages.warning(request,"Bu e-posta adresi ile kayıtlı bir üye var.")
+def registerPage(request):
+
+    if request.method == "POST":
+        fname = request.POST.get("fname")
+        lname = request.POST.get("lname")
+        email = request.POST.get("email")
+        username = request.POST.get("username")
+        password1 =request.POST.get("password1")
+        password2 = request.POST.get("password2") 
+        
+        boolnum = boolup = False
+        boolchar = True
+        if fname and lname and email and username and password1 and password2:
+            char = ["*;:@?ı/"]    
+            if password1 == password2:
+                for i in password1:
+                    if i.isupper():
+                        boolup = True
+                    if i.isnumeric():
+                        boolnum = True
+                    if i in char:
+                        boolchar = False
+                if boolup and boolnum  and boolchar and len(password1)>=6:
+                    if not User.objects.filter(username = username).exists():
+                        if not User.objects.filter(email =email).exists():
+                            user = User.objects.create_user(first_name =fname, username = username, last_name = lname, email = email, password=password1)
+                            user.save()
+                            messages.success(request,"Kayıt işleminiz başarı ile tamamlandı")
+                            return redirect("loginPage")
                         else:
-                            messages.warning(request,"Bu Kullanıcı Adı ile kayıtlı bir üye var.")
+                            messages.error(request,"Bu e-posta adresi ile kayıtlı bir üye var.")
                     else:
-                        messages.warning(request,"E-Posta ve Kullanıcı Adı alanları boş bırakılamaz ve paroalnız 6 haneden buyuk olmalı aynı zmanda Tc'niz 11 haneli olmalı")
+                        messages.error(request,"Bu Kullanıcı Adı ile kayıtlı bir üye var.")
                 else:
-                    messages.warning(request,"Şifreler uyuşmuyor")
+                    messages.error(request,"E-Posta ve Kullanıcı Adı alanları boş bırakılamaz ve paroalnız 6 haneden buyuk olmalı aynı zmanda Tc'niz 11 haneli olmalı")
             else:
-                messages.warning(request,"Tüm Alanları Doldurunuz")
+                messages.error(request,"Şifreler uyuşmuyor")
+        else:
+            messages.error(request,"Tüm Alanları Doldurunuz")
     context ={}
     return render(request, "user/register.html", context)

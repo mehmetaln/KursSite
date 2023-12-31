@@ -19,98 +19,141 @@
       <!-- Collapsible wrapper -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Navbar brand -->
-        <a class="navbar-brand mt-2 mt-lg-0" href="#">
-          <img
-            src="{% static 'img/logo.png' %}"
-            height="15"
-            alt="MDB Logo"
-            loading="lazy"
-          />
-        </a>
+        <div class="navbar-brand mt-2 mt-lg-0" href="#">
+          <a class="text-black " style="font-size: xx-large;" href="/">Coursera</a>
+        </div>
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#">Dashboard</a>
+            <a class="nav-link" href="#">Tüm Eğitimler</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Team</a>
+            <a class="nav-link" href="#">Coursera'da Eğitim Verin</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Projects</a>
+            <a class="nav-link" href="#">Satın Aldıklarım</a>
           </li>
         </ul>
         <!-- Left links -->
       </div>
       <!-- Collapsible wrapper -->
   
-      <!-- Right elements -->
-      <div class="d-flex align-items-center">
-        <!-- Icon -->
-        <a class="text-reset me-3" href="#">
-          <i class="fas fa-shopping-cart"></i>
-        </a>
-  
+
+            
         <!-- Notifications -->
-        <div class="dropdown">
-          <a
-            data-mdb-dropdown-init
-            class="text-reset me-3 dropdown-toggle hidden-arrow"
-            href="#"
-            id="navbarDropdownMenuLink"
-            role="button"
-            aria-expanded="false"
-          >
-            <i class="fas fa-bell"></i>
-            <span class="badge rounded-pill badge-notification bg-danger">1</span>
-          </a>
-          <ul
-            class="dropdown-menu dropdown-menu-end"
-            aria-labelledby="navbarDropdownMenuLink"
-          >
-            <li>
-              <a class="dropdown-item" href="#">Some news</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Another news</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </li>
-          </ul>
-        </div>
-        <!-- Avatar -->
-        <div class="dropdown">
-          <a
-            data-mdb-dropdown-init
-            class="dropdown-toggle d-flex align-items-center hidden-arrow"
-            href="#"
-            id="navbarDropdownMenuAvatar"
-            role="button"
-            aria-expanded="false"
-          >
-            <img
-              src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-              class="rounded-circle"
-              height="25"
-              alt="Black and White Portrait of a Man"
-              loading="lazy"
-            />
-          </a>
-          <ul
-            class="dropdown-menu dropdown-menu-end"
-            aria-labelledby="navbarDropdownMenuAvatar"
-          >
-            <li>
-              <a class="dropdown-item" href="#">My profile</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Settings</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Logout</a>
-            </li>
-          </ul>
-        </div>
+        {% if request.user.is_authenticated %}
+        <button  class="  btn btn-primary text-light mx-5">{{request.user }}</button>          
+        <div class="d-flex align-items-center">
+          <!-- Icon -->
+          <a class="text-reset me-3" href="#">
+            <i class="fas fa-shopping-cart"></i>
+          </a>        
+          <div class="dropdown"><a  data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow"  href="#"  id="navbarDropdownMenuLink" role="button" aria-expanded="false">
+              <i class="fas fa-bell"></i><span class="badge rounded-pill badge-notification bg-danger"></span> </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
+              <li>
+                <a class="dropdown-item " href="#">Some news</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Another news</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </li>
+            </ul>
+          </div>
+          <!-- Avatar -->
+          <div class="dropdown">
+            <a
+              data-mdb-dropdown-init
+              class="dropdown-toggle d-flex align-items-center hidden-arrow"
+              href="#"
+              id="navbarDropdownMenuAvatar"
+              role="button"
+              aria-expanded="false"
+            >
+              <img
+                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                class="rounded-circle"
+                height="25"
+                alt="Black and White Portrait of a Man"
+                loading="lazy"
+              />
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuAvatar"
+            >
+              <li>
+                <a class="dropdown-item" href="#">Profil</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Ayarlar</a>
+              </li>
+              <li>
+                <a class="dropdown-item text-danger" href="#">Çıkış</a>
+              </li>
+            </ul>
+          </div>
+        {% else %}
+        <div class="d-flex align-items-center">
+          <!-- Icon -->
+          <a class="text-reset me-3" href="#">
+            <i class="fas fa-shopping-cart"></i>
+          </a>        
+          <div class="dropdown"><a  data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow"  href="#"  id="navbarDropdownMenuLink" role="button" aria-expanded="false">
+              <i class="fas fa-bell"></i><span class="badge rounded-pill badge-notification bg-danger"></span> </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
+              <li>
+                <a class="dropdown-item " href="#">Some news</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Another news</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </li>
+            </ul>
+          </div>
+          <!-- Avatar -->
+          <div class="dropdown">
+            <a
+              data-mdb-dropdown-init
+              class="dropdown-toggle d-flex align-items-center hidden-arrow"
+              href="#"
+              id="navbarDropdownMenuAvatar"
+              role="button"
+              aria-expanded="false"
+            >
+              <img
+                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                class="rounded-circle"
+                height="25"
+                alt="Black and White Portrait of a Man"
+                loading="lazy"
+              />
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuAvatar"
+            >
+              <li>
+                <a class="dropdown-item" href="#">Profil</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Ayarlar</a>
+              </li>
+              <li>
+                <a href="logout/user"  type="button" class="btn btn-warning me-3">
+                  Çıkış
+                </a>
+              </li>
+            </ul>
+          </div>
+              <!-- Right elements -->
+        {% endif %}   
       </div>
       <!-- Right elements -->
     </div>

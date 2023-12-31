@@ -28,8 +28,8 @@ urlpatterns = [
     
     
     # USER
-    path('login', loginPage, name="loginPage"),
-    path('register', registerPage, name="registerPage")
+    path('login/', loginPage, name="loginPage"),
+    path('register/', registerPage, name="registerPage")
     
     
     

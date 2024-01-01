@@ -30,7 +30,7 @@ urlpatterns = [
     # USER
     path('login/', loginPage, name="loginPage"),
     path('register/',registerPage, name="registerPage"),
-    path('logout/user/',logoutUser,name="logoutPage")
+    path('logout/user/',logoutUser,name="logoutUser")   
     
     
     

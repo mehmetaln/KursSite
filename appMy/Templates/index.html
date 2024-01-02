@@ -60,17 +60,14 @@
     <div class="row">
       <h2>Kaydolmak isteyebileceğiniz diger kurslar</h2>
       <hr>
-      {% for i in kurs_list  %}
-      <div class="col-2" style="margin-right: 6rem;">
+      {% for i in kurs_random_list  %}
+      <div class="col-2" style="margin-right: 6rem; margin-top: 1rem;">
         <div class="" style="width: 18rem;">
           <img src="{{i.image.url}}" class= "card-img-top"/>
           <div class="card-body my-2">
             <h6 class="card-title fw-bold">{{ i.title | truncatechars:75}}</h6>
           </div>
          <div style="display: block; justify-content: start; " >
-          </div>
-          <div class="card-body">
-            <a href="#" class="card-link text-primary">{{ i.user}}</a>
           </div>
           <div class="card-body">
             <a href="#" class="card-link text-black">{{ i.puan }}</a>
@@ -81,9 +78,13 @@
           <div class="card-body">
             <a href="#" class="card-link text-black">{{ i.category }}</a>
           </div>
+          <div class="card-body">
+            <a href="#" class="card-link text-primary">{{ i.user}}</a>
+          </div>
         </div>
       </div>
-        {% endfor %}
+      {% endfor %}
+      <hr>
         
 
 

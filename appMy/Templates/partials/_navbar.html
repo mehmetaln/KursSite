@@ -38,8 +38,18 @@
       </div>
       <!-- Collapsible wrapper -->
   
-
-            
+      <div  style="margin-right:6rem ;">
+        <div class="input-group mx-5" >
+          <div class="form-outline"  data-mdb-input-init>
+            <input style="border-start-start-radius: 10px;" type="search" id="form1" class="form-control"  />
+            <label class="form-label" for="form1">Search</label>
+          </div>
+          <button type="button" class="btn btn-primary" style="border-start-end-radius: 10px;" data-mdb-ripple-init>
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+              
         <!-- Notifications -->
         {% if request.user.is_authenticated %}
         <a class="text-primary mx-3">{{request.user }}</a>         

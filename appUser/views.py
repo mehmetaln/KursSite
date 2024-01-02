@@ -31,7 +31,7 @@ def loginPage(request):
 
 def logoutUser(request):
     logout(request)
-    return redirect("loginPage")
+    return redirect("indexPage")
 
 
 

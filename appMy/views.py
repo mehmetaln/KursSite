@@ -22,3 +22,30 @@ def indexPage(request):
         "kurs_random_list": kurs_random_list[:8],
     }
     return render(request, "index.html",context)
+
+
+def allkursPage(request,cslug =None):
+    
+    
+    if cslug:
+        kurs_list = Kurs.objects.filter(category__slug = cslug).order_by('-id')
+    else:
+        kurs_list = Kurs.objects.all().order_by('-id')
+        
+    query =request.GET.get("query")
+    
+    if query:
+        kurs_list= Kurs.objects.filter(Q(title__icontains = query))    
+    
+    category_list = Category.objects.all()   # hocaya sorulacak
+    
+    
+    
+    
+    
+    context = {
+        "kurs_list":kurs_list,
+        "category_list": category_list,
+
+    }
+    return render(request,"allkurs.html", context)

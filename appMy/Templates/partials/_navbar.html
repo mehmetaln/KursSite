@@ -25,7 +25,7 @@
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#">Tüm Eğitimler</a>
+            <a class="nav-link" href="{% url 'allkursPage' %}">Tüm Eğitimler</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Coursera'da Eğitim Verin</a>
@@ -37,19 +37,19 @@
         <!-- Left links -->
       </div>
       <!-- Collapsible wrapper -->
-  
       <div  style="margin-right:6rem ;">
         <div class="input-group mx-5" >
           <div class="form-outline"  data-mdb-input-init>
-            <input style="border-start-start-radius: 10px;" type="search" id="form1" class="form-control"  />
-            <label class="form-label" for="form1">Search</label>
+            <form type ="GET"  >
+              <input name="query" type="search" id="form1" class="form-control"  />
+              <label class="form-label" for="form1">Search</label>
+            </form>
           </div>
-          <button type="button" class="btn btn-primary" style="border-start-end-radius: 10px;" data-mdb-ripple-init>
+          <button type="submit" class="btn btn-primary" style="border-start-end-radius: 10px;" data-mdb-ripple-init>
             <i class="fas fa-search"></i>
           </button>
         </div>
       </div>
-              
         <!-- Notifications -->
         {% if request.user.is_authenticated %}
         <a class="text-primary mx-3">{{request.user }}</a>         
@@ -114,39 +114,59 @@
           </a>        
           <div class="dropdown"><a  data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow"  href="#"  id="navbarDropdownMenuLink" role="button" aria-expanded="false">
               <i class="fas fa-bell"></i><span class="badge rounded-pill badge-notification bg-danger"></span> </a>
-            <ul
-              class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
-              <li>
-                <a class="dropdown-item " href="#">Some news</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">Another news</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </li>
-            </ul>
           </div>
           <!-- Avatar -->
           <div class="dropdown">
-            <a
-              data-mdb-dropdown-init
-              class="dropdown-toggle d-flex align-items-center hidden-arrow"
-              href="#"
-              id="navbarDropdownMenuAvatar"
-              role="button"
-              aria-expanded="false"
-            >
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25" alt="Black and White Portrait of a Man"loading="lazy"/></a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar"><li><a class="dropdown-item" href="#">Profil</a></li><li> <a class="dropdown-item" href="#">Ayarlar</a></li>
-            </ul>
+            <a 
+              data-mdb-dropdown-init  class=" btn btn-primary" href="{% url 'loginPage' %}"
+            > Giriş
+             </a>
           </div>
         {% endif %}   
       </div>
     </div>
   </div> 
 </nav>
+<nav  class="navbar navbar-expand-lg  bg-body-tertiary">
+  <div class="container ">
+    <button
+      data-mdb-collapse-init class="navbar-toggler"type="button" data-mdb-target="#navbarLeftAlignExample" aria-controls="navbarLeftAlignExample"  aria-expanded="false" aria-label="Toggle navigation"> <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarLeftAlignExample">
+      
+      {% for i in category_list  %}
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a style="text-align: center; width: 500px ; height: auto;" data-mdb-dropdown-init class="nav-link dropdown-toggle" href="{% url 'allkursPage2' i.slug %}"  id="navbarDropdown" role="button" aria-expanded="false">{{ i.title }}</a>
+          
+          
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li class="">
+              <a class="dropdown-item" href="{% url 'allkursPage2' i.slug %}">{{ i.alt_title1 }}</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'allkursPage2' i.slug %}">{{ i.alt_title2 }}</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'allkursPage2' i.slug %}">{{ i.alt_title3 }}</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'allkursPage2' i.slug %}">{{ i.alt_title4 }}</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'allkursPage2' i.slug %}">{{ i.alt_title5 }}</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'allkursPage2' i.slug %}">{{ i.alt_title6 }}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      {% endfor %}
+    </div>
+  </div>
+</nav>
+
 
 
 

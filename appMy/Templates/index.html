@@ -4,46 +4,6 @@
 
 {% block body %}
 <main>
-  <nav  class="navbar navbar-expand-lg  bg-body-tertiary">
-    <div class="container ">
-      <button
-        data-mdb-collapse-init class="navbar-toggler"type="button" data-mdb-target="#navbarLeftAlignExample" aria-controls="navbarLeftAlignExample"  aria-expanded="false" aria-label="Toggle navigation"> <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse " id="navbarLeftAlignExample">
-        
-        {% for i in category_list  %}
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
-            <a style="text-align: center; width: 500px ; height: auto;" data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button" aria-expanded="false">{{ i.title }}</a>
-            
-            
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li class="">
-                <a class="dropdown-item" href="#">{{ i.alt_title1 }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">{{ i.alt_title2 }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">{{ i.alt_title3 }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">{{ i.alt_title4 }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">{{ i.alt_title5 }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">{{ i.alt_title6 }}</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        {% endfor %}
-          
-      </div>
-    </div>
-  </nav>
 
 
 
@@ -71,8 +31,8 @@
       </button>
     </div>
 
-    <div class="row">
-      <h2>Kaydolmak isteyebileceğiniz diger kurslar</h2>
+    <div class="row my-5 ">
+      <h2>İlginizi Çekebilecek Bazı Kurslar</h2>
       <hr>
       {% for i in kurs_random_list  %}
       <div class="col-2" style="margin-right: 6rem; margin-top: 1rem;">
@@ -99,10 +59,6 @@
       </div>
       {% endfor %}
       <hr>
-        
-
-
-     
     </div>
 
 

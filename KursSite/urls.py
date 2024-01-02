@@ -25,6 +25,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', indexPage, name="indexPage"),
+    path('all/', allkursPage, name = "allkursPage"),
+    path('all/<cslug>', allkursPage, name = "allkursPage2"),
+    
     
     
     # USER

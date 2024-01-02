@@ -30,9 +30,9 @@ urlpatterns = [
     # USER
     path('login/', loginPage, name="loginPage"),
     path('register/',registerPage, name="registerPage"),
-    path('logout/user/',logoutUser,name="logoutUser")   
+    path('logout/user/',logoutUser,name="logoutUser"),
     
     
     
     
-] + static (settings.MEDIA_URL, documen_root =settings.MEDIA_ROOT)
+] + static (settings.MEDIA_URL, document_root =settings.MEDIA_ROOT)

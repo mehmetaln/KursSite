@@ -42,7 +42,7 @@
             
         <!-- Notifications -->
         {% if request.user.is_authenticated %}
-        <button  class="  btn btn-primary text-light mx-3">{{request.user }}</button>         
+        <a class="text-primary mx-3">{{request.user }}</a>         
         <a href="logout/user/" class="text-danger me-3">
           Çıkış
         </a> 
@@ -128,30 +128,18 @@
               aria-expanded="false"
             >
               <img
-                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                class="rounded-circle"
-                height="25"
-                alt="Black and White Portrait of a Man"
-                loading="lazy"
-              />
-            </a>
-            <ul
-              class="dropdown-menu dropdown-menu-end"
-              aria-labelledby="navbarDropdownMenuAvatar"
-            >
-              <li>
-                <a class="dropdown-item" href="#">Profil</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">Ayarlar</a>
-              </li>
+                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25" alt="Black and White Portrait of a Man"loading="lazy"/></a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar"><li><a class="dropdown-item" href="#">Profil</a></li><li> <a class="dropdown-item" href="#">Ayarlar</a></li>
             </ul>
           </div>
-              <!-- Right elements -->
         {% endif %}   
       </div>
-      <!-- Right elements -->
     </div>
-    <!-- Container wrapper -->
-  </nav>
-  <!-- Navbar -->
+  </div> 
+</nav>
+
+
+
+
+  
+

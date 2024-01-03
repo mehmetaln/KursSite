@@ -13,7 +13,9 @@ class Category(models.Model):
     slug = models.SlugField(("Slug"))
     
     def __str__(self):
-        return self.title
+        return self.title 
+    
+
 
 
 class Kurs(models.Model):

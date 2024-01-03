@@ -26,8 +26,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', indexPage, name="indexPage"),
     path('all/', allkursPage, name = "allkursPage"),
-    path('all/<cslug>', allkursPage, name = "allkursPage2"),
-    
+    path('all/<oslug>', allkursPage, name = "allkursPage2"),
+    path('all/<pslug>', allkursPage, name = "allkursPage3"),
+    path('all/<fslug>', allkursPage, name = "allkursPage4"),
     
     
     # USER

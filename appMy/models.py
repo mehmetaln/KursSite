@@ -1,24 +1,30 @@
 from django.db import models
 from django.contrib.auth.models import User
-from mptt.models import MPTTModel, TreeForeignKey
-from django import forms
+# from mptt.models import MPTTModel, TreeForeignKey
+# from django import forms
 
-class Category(models.Model):
+class OnlineCategory(models.Model):
     title =models.CharField(("Başlik"), max_length=50)
-    alt_title1 = models.CharField(("Alt Başlık1"), max_length=50, null =True, blank = True)
-    alt_title2 = models.CharField(("Alt Başlık2"), max_length=50, null =True, blank = True)
-    alt_title3= models.CharField(("Alt Başlık3"), max_length=50, null =True, blank = True) 
-    alt_title4 = models.CharField(("Alt Başlık4"), max_length=50, null =True, blank = True) 
-    alt_title5 = models.CharField(("Alt Başlık5"), max_length=50, null =True, blank = True) 
-    alt_title6 = models.CharField(("Alt Başlık6"), max_length=50, null =True, blank = True) 
-    slug = models.SlugField(("Slug"))
+    yslug = models.SlugField(("Slug"))
+    
+    def __str__(self):
+        return self.title 
+class FacetoFaceCategory(models.Model):
+    title =models.CharField(("Başlik"), max_length=50)
+    tslug = models.SlugField(("Slug"))
     
     def __str__(self):
         return self.title 
     
+    
+    
+    
+    
+    
+    
 class Province(models.Model):
     title = models.CharField(max_length=50, null =True)
-    slug = models.SlugField(("Slug"),null=True)
+    islug = models.SlugField(("Slug"),null=True)
     
     
     def __str__(self):
@@ -26,7 +32,8 @@ class Province(models.Model):
 
 class Kurs(models.Model):
     user = models.ForeignKey(User, related_name = "user1", verbose_name=("Kullanıcı"), on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, verbose_name=("Kategori"), null =True, on_delete=models.CASCADE)
+    onlinecategory = models.ForeignKey(OnlineCategory, verbose_name=("Online Kategori"), blank =True, null =True, on_delete=models.CASCADE)
+    facetofacecategory = models.ForeignKey(FacetoFaceCategory, verbose_name=("Yüz Yüze KAtegori"), blank = True, null =True, on_delete=models.CASCADE)
     title = models.CharField(("Başlik"), max_length=50)
     puan = models.IntegerField(("Puan"), default=0)
     price = models.IntegerField(("Fiyat"), default=0)

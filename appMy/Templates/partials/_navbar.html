@@ -40,14 +40,14 @@
       <div  style="margin-right:6rem ;">
         <div class="input-group mx-5" >
           <div class="form-outline"  data-mdb-input-init>
-            <form type ="GET"  >
+            <form method ="GET" action="{% url 'allkursPage' %}">
               <input name="query" type="search" id="form1" class="form-control"  />
               <label class="form-label" for="form1">Search</label>
-            </form>
-          </div>
-          <button type="submit" class="btn btn-primary" style="border-start-end-radius: 10px;" data-mdb-ripple-init>
-            <i class="fas fa-search"></i>
-          </button>
+            </div>
+            <button type="submit" class="btn btn-primary" style="border-start-end-radius: 10px;" data-mdb-ripple-init>
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
         </div>
       </div>
         <!-- Notifications -->
@@ -134,33 +134,36 @@
     </button>
     <div class="collapse navbar-collapse " id="navbarLeftAlignExample">
       
-      {% for i in category_list  %}
+      
+      
+      
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
-          <a style="text-align: center; width: 500px ; height: auto;" data-mdb-dropdown-init class="nav-link dropdown-toggle" href="{% url 'allkursPage2' i.slug %}"  id="navbarDropdown" role="button" aria-expanded="false">{{ i.title }}</a>
+          <a style="text-align: center; width: 500px ; height: auto;" data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button" aria-expanded="false">Yüz Yüze Eğitim</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for i in facetofacecategory_list  %}
             <li class="">
-              <a class="dropdown-item" href="{% url 'allkursPage2' i.slug %}">{{ i.alt_title1 }}</a>
+              <a class="dropdown-item" href="{% url 'allkursPage4' i.tslug %}">{{ i.title }}</a>
             </li>
-            <li>
-              <a class="dropdown-item" href="{% url 'allkursPage2' i.slug %}">{{ i.alt_title2 }}</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="{% url 'allkursPage2' i.slug %}">{{ i.alt_title3 }}</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="{% url 'allkursPage2' i.slug %}">{{ i.alt_title4 }}</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="{% url 'allkursPage2' i.slug %}">{{ i.alt_title5 }}</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="{% url 'allkursPage2' i.slug %}">{{ i.alt_title6 }}</a>
-            </li>
+            {% endfor %}
           </ul>
         </li>
       </ul>
-      {% endfor %}
+     
+     
+     
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a style="text-align: center; width: 500px ; height: auto;" data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button" aria-expanded="false">Online Eğitim</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for i in onlinecategory_list  %}
+            <li class="">
+              <a class="dropdown-item" href="{% url 'allkursPage2' i.yslug %}">{{ i.title }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+      </ul>
 
       
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -169,7 +172,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             {% for i in province_list %}
             <li class="">
-              <a class="dropdown-item" href="{% url 'allkursPage2' i.slug %}">{{ i.title }}</a>
+              <a class="dropdown-item" href="{% url 'allkursPage3' i.islug %}">{{ i.title }}</a>
             </li>
             {% endfor %}
           </ul>

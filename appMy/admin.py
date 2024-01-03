@@ -4,3 +4,4 @@ from appMy.models import *
 
 admin.site.register(Kurs)
 admin.site.register(Category)
+admin.site.register(Province)

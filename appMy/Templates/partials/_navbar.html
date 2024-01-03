@@ -138,8 +138,6 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
           <a style="text-align: center; width: 500px ; height: auto;" data-mdb-dropdown-init class="nav-link dropdown-toggle" href="{% url 'allkursPage2' i.slug %}"  id="navbarDropdown" role="button" aria-expanded="false">{{ i.title }}</a>
-          
-          
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li class="">
               <a class="dropdown-item" href="{% url 'allkursPage2' i.slug %}">{{ i.alt_title1 }}</a>
@@ -163,6 +161,20 @@
         </li>
       </ul>
       {% endfor %}
+
+      
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a style="text-align: center; width: 500px ; height: auto;" data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button" aria-expanded="false">İl</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for i in province_list %}
+            <li class="">
+              <a class="dropdown-item" href="{% url 'allkursPage2' i.slug %}">{{ i.title }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

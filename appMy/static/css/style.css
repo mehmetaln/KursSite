@@ -1,0 +1,8 @@
+
+  .dropdown-menu {
+    max-height: 200px; /* Dropdown menüsünün maksimum yüksekliği */
+    width: 500px; /* Dropdown menüsünün genişliği */
+    right: 0; /* Dropdown menüsünün sağ kenarı ekrana göre konumlandırma */
+    left: auto; /* Dropdown menüsünün sol kenarı ekrana göre konumlandırma */
+    top: 100%; /* Dropdown menüsünün açıldığı noktanın altından itibaren başlama konumu */
+  }

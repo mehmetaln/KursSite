@@ -79,3 +79,9 @@ def registerPage(request):
             messages.error(request,"Tüm Alanları Doldurunuz")
     context ={}
     return render(request, "user/register.html", context)
+
+def hesapPage(request):
+    
+    
+    context = {}
+    return render(request,"user/hesap.html",context)

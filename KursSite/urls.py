@@ -35,6 +35,7 @@ urlpatterns = [
     path('login/', loginPage, name="loginPage"),
     path('register/',registerPage, name="registerPage"),
     path('logout/user/',logoutUser,name="logoutUser"),
+    path('hesap/',hesapPage, name='hesapPage'),
     
     
     

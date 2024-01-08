@@ -107,9 +107,33 @@
                             </form>
                         </div>
                         </div>
-                    </div>
-                        <hr>
+                        </div>
                         <li class="my-3 fw-bold"><a href="#">Profil Resmi: {{ request.user.image.url }}</a></li>
+                        <!-- Modal Profil Resmi Change -->
+                        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Profil Resmini Değiştir</h5>
+                            <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="modal-body d-flex flex-column gap-3">
+                                    <div>
+                                        {{ request.user.image.url }}
+                                    </div>
+                                    <input type="files" name="image" class="form-control">
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-mdb-ripple-init data-mdb-dismiss="modal">iptal</button>
+                                <button type="submit" name="submit" value="imageSubmit" class="btn btn-success" data-mdb-ripple-init>Kaydet</button>
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                        </div>
+                    
                         <hr>
                     </ul>
                 </form>
@@ -121,7 +145,7 @@
                         <li class="my-4"><a data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#telModal" class="btn btn-primary">Telefon Degiştir</a></li>
                         <li class="my-4"><a data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#passwordModal" class="btn btn-primary">Parola Degiştir</a></li>
                         <li class="my-4"><a data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#userModal" class="btn btn-primary">Kullanıcı Degiştir</a></li>
-                        <li class="my-4"><button class="btn btn-primary">Profil Foto Degiştir</button></li>
+                        <li class="my-4"> <a data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#imageModal" class="btn btn-primary">Profil Foto Degiştir</a></li>
                     </ul>
                 </form>
             </div>

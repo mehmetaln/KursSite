@@ -35,25 +35,22 @@
           </li>
                  <!-- FACE TO FACE CAREGORY -->
           <li class="nav-item dropdown">
-            <a style="text-align: center; width: auto ; height: auto;" data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button" aria-expanded="false">Yüz Yüze Eğitim</a>
+            <a data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button" aria-expanded="false">Yüz Yüze Eğitim</a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               {% for i in facetofacecategory_list  %}
-              <li class="">
-                <div class="dropend">
+              <li class="a ">
+                <div class="d-flex justify-content-beetwen dropend">
                   <a  data-mdb-dropdown-auto-close="False">{{ i.title }}</a>
                   <a class=" btn-secondary  dropdown-toggle dropdown-toggle-split"  data-mdb-dropdown-init  data-mdb-ripple-init  aria-expanded="false"   data-mdb-dropdown-auto-close="False"  ></a> 
                   <ul class="dropdown-menu ">
                     {% for i in province_list %}
-                    <li class="">
                       <a class="dropdown-item" href="{% url 'allkursPage3' i.islug %}">{{ i.title }}</a>
-                    </li>
                     {% endfor %}
                   </ul>
                 </div>
-              </li>
               {% endfor %}
-            </ul>
-          </li>
+            </li>
+          </ul>
 
         <!-- ONLİNE KATEGORİ -->
 

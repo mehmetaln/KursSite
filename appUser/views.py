@@ -81,7 +81,39 @@ def registerPage(request):
     return render(request, "user/register.html", context)
 
 def hesapPage(request):
+    if request.method == "POST":
+        submit = request.POST.get("submit")
+        if submit =="emailSubmit":
+            email = request.POST.get("email")
+            password = request.POST.get("password")
+            if email and password:
+                if request.user.check_password(password):
+                    request.user.email = email
+                    request.user.save()
+                    messages.success(request, "Emailiniz başarı ile değiştirildi") 
+                    logout(request)
+                    return redirect('loginPage')
+                else:
+                    messages.error(request,'Girilen Şifre Yanlış')
+            else:
+                messages.error(request,'Boş Bırakılan alanlar var')   
     
-    
+        elif submit == "telSubmit":
+            tel =request.POST.get("tel")
+            password = request.POST.get("password")
+            if tel and password:
+                if request.user.check_password(password):
+                    request.user.usermy.tel = tel
+                    request.user.usermy.save()
+                    messages.success(request,"Telefon numaranız başarı ile değiştirildi")
+                    logout(request)
+                    return redirect("loginPage")
+        elif submit =="passwordSubmit":
+            password = request.POST.get("password")
+            password1 = request.POST.get("password1")
+            password2 = request.POST.get("password2")
+            
+        
+                
     context = {}
     return render(request,"user/hesap.html",context)

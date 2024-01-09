@@ -71,3 +71,5 @@ def allkursPage(request, oslug=None, pslug=None, fslug=None):
     }
 
     return render(request, "allkurs.html", context)
+
+

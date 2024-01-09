@@ -120,10 +120,8 @@
                             <form method="POST">
                                 {% csrf_token %}
                                 <div class="modal-body d-flex flex-column gap-3">
-                                    <div>
-                                        {{ request.user.image.url }}
-                                    </div>
-                                    <input type="files" name="image" class="form-control">
+                                    <input type="file" name="image" id="">
+                                    <input type="password" name="password" class="form-control" placeholder="Lütfen Parolanızı Giriniz ">
                                 </div>
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-mdb-ripple-init data-mdb-dismiss="modal">iptal</button>
@@ -132,8 +130,7 @@
                             </form>
                         </div>
                         </div>
-                        </div>
-                    
+                        </div>                   
                         <hr>
                     </ul>
                 </form>

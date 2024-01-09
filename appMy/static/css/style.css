@@ -1,8 +1,24 @@
-
-  .dropdown-menu {
-    max-height: 200px; /* Dropdown menüsünün maksimum yüksekliği */
-    width: 500px; /* Dropdown menüsünün genişliği */
-    right: 0; /* Dropdown menüsünün sağ kenarı ekrana göre konumlandırma */
-    left: auto; /* Dropdown menüsünün sol kenarı ekrana göre konumlandırma */
-    top: 100%; /* Dropdown menüsünün açıldığı noktanın altından itibaren başlama konumu */
+  .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    transition: opacity 0.5s ease; /* Açık kalma süresini kontrol eden özellik */
+    opacity: 1; /* Dropdown menüsünün tamamen görünür olması */
   }
+  
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff; /* Arka plan rengi isteğinize göre ayarlanabilir */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.5s ease; /* Açık kalma süresini kontrol eden özellik */
+  }
+  
+  .dropdown-menu a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-menu a:hover {
+    background-color: #f1f1f1;
+  }  

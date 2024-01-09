@@ -48,7 +48,7 @@
                             <form method="POST">
                                 {% csrf_token %}
                                 <div class="modal-body d-flex flex-column gap-3">
-                                    <input type="text" name="text" value="{{ request.user.tel }}" class="form-control">
+                                    <input type="text" name="tel" value="{{ request.user.usermy.tel }}" class="form-control">
                                     <input type="password" name="password" placeholder="Lütfen Parolanızı Giriniz" class="form-control">
                                 </div>
                                 <div class="modal-footer">
@@ -97,7 +97,7 @@
                             <form method="POST">
                                 {% csrf_token %}
                                 <div class="modal-body d-flex flex-column gap-3">
-                                    <input type="text" name="user" {{ request.user }} class="form-control">
+                                    <input type="text" name="username" {{ request.user }} class="form-control">
                                     <input type="password" name="password" placeholder="Lütfen Parolanızı Giriniz" class="form-control">
                                 </div>
                                 <div class="modal-footer">

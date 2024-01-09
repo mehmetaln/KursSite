@@ -89,6 +89,7 @@ def hesapPage(request):
             if email and password:
                 if request.user.check_password(password):
                     request.user.email = email
+                    print(request.user.email)
                     request.user.save()
                     messages.success(request, "Emailiniz başarı ile değiştirildi") 
                     logout(request)
@@ -108,11 +109,62 @@ def hesapPage(request):
                     messages.success(request,"Telefon numaranız başarı ile değiştirildi")
                     logout(request)
                     return redirect("loginPage")
+                else:
+                     messages.error(request,"Girilen parola yanlış")
+            else:
+                messages.error(request,"Boş Bırakilan alanlar var")
+
         elif submit =="passwordSubmit":
             password = request.POST.get("password")
             password1 = request.POST.get("password1")
             password2 = request.POST.get("password2")
-            
+            if password and password1 and password2:
+                if request.user.check_password(password):
+                    if password1 == password2:
+                        request.user.set_password(password1)
+                        request.user.save()
+                        messages.success(request, "PArolanız başarı ile değiştirildi")
+                        logout(request)
+                        return redirect("loginPage")
+                    else:
+                        messages.error(request,"Parolalar uyuşmuyor")
+                else:
+                    messages.error(request,"Girilen Parola Yanlış")
+            else:
+                messages.error(request,"Bos bırakılan alanlar var.")
+        
+        elif submit == "userSubmit":
+            username = request.POST.get("username")
+            password =request.POST.get("password")
+            if username and password:
+                if request.user.check_password(password):
+                    request.user.username = username
+                    request.user.save()
+                    messages.success(request, "Kullanıcı adınız başarıyla değiştirildi")
+                    logout(request)
+                    return redirect ("loginPage")
+                else:
+                    messages.error(request,"Geçersiz Şifre")
+            else:
+                messages.error(request,"Bos bırakılan yerler var")
+                
+        elif submit == "imagesubmit":
+            image=request.FILES['image']
+            password =request.POST.get("password")
+            if image and password:
+                if request.user.check_password(password):
+                    request.user.image = image
+                    request.user.save()
+                    messages.success(request,"PRofil Fotografınız değiştirildi")
+                    return redirect("hesapPage")
+                else:
+                    messages.error(request,"Girilen şifre yanlış")
+            else:
+                messages.error(request,"Boş Bırakılan alanlar var")
+                
+                
+        return redirect("hesapPage")
+
         
                 
     context = {}

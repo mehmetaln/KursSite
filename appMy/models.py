@@ -39,5 +39,6 @@ class Kurs(models.Model):
     price = models.IntegerField(("Fiyat"), default=0)
     image = models.ImageField(("Resim"), upload_to="kurs",)    
     province = models.ForeignKey(Province, verbose_name=("Province"), blank =True, null = True, on_delete=models.CASCADE)
+    text = models.TextField(("Acıklama"), max_length=5000, default = "-",)
     def __str__(self):
         return self.title

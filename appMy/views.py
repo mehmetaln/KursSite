@@ -15,7 +15,12 @@ from django.contrib import messages # kullanıc"
 
 
 
-
+def detailPage(request,kid):
+    kurs_list = Kurs.objects.filter(id=kid)
+    context = {
+        "kurs_list": kurs_list
+    }
+    return render (request,"detail.html",context)
 
 
 

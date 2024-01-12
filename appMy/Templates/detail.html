@@ -6,9 +6,20 @@
     
 <main>
     <div class="container">
-        <div>
-            <img src="{% %}" alt="">
-        </div>
+        
+        {% for i in kurs_list %}
+        <section class="  d-flex flex-column gap-4" style="height: auto">
+
+            <div><img style="height: auto; width:100% ;" src="{{ i.image.url }}" alt=""></div>
+            <h2>{{ i.title }}</h2>
+            <div class="text-black">{{ i.text }}</div>   
+            <div style="display: flex; justify-content:space-between ;">
+                <div class="text-black fw-bold fs-5">{{ i.puan }} <i class="fa-solid fa-star text-warning "></i></div>
+                <div class="text-primary fw-bold fs-5">{{ i.user }}</div>
+            </div>
+        </section>        
+        {% endfor %}
+            
     </div>
 </main>
 

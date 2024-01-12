@@ -34,26 +34,26 @@
     <div class="row my-5 ">
       <h2>İlginizi Çekebilecek Bazı Kurslar</h2>
       <hr>
-      {% for i in kurs_random_list  %}
+      {% for i in kurs_random_list %}
       <div class="col-2" style="margin-right: 6rem; margin-top: 1rem;">
         <div class="" style="width: 18rem;">
-          <img src="{{i.image.url}}" class= "card-img-top"/>
+          <a href="{% url 'detailPage' i.id %}"><img src="{{i.image.url}}" class= "card-img-top"/></a>
           <div class="card-body my-2">
-            <h6 class="card-title fw-bold">{{ i.title | truncatechars:75}}</h6>
+            <h6 class="card-title fw-bold"><a href="{% url 'detailPage' i.id %}">{{ i.title | truncatechars:75}}</a></h6>
           </div>
-         <div style="display: block; justify-content: start; " >
-          </div>
-          <div class="card-body">
-            <a href="#" class="card-link text-black">{{ i.puan }} <i class="fa-solid fa-star text-warning "></i></a>
+         <div style="display: block; justify-content: start;">
           </div>
           <div class="card-body">
-            <a href="#" class="card-link text-black">{{ i.price }}  ₺ </a>
+            <a href="{% url 'detailPage' i.id %}" class="card-link text-black">{{ i.puan }} <i class="fa-solid fa-star text-warning "></i></a>
           </div>
           <div class="card-body">
-            <a href="#" class="card-link text-black">{{ i.category }}</a>
+            <a href="{% url 'detailPage' i.id %}" class="card-link text-black">{{ i.price }}  ₺ </a>
           </div>
           <div class="card-body">
-            <a href="#" class="card-link text-primary">{{ i.user}}</a>
+            <a href="{% url 'detailPage' i.id %}" class="card-link text-black">{{ i.category }}</a>
+          </div>
+          <div class="card-body">
+            <a href="{% url 'detailPage' i.id %}" class="card-link text-primary">{{ i.user}}</a>
           </div>
         </div>
       </div>

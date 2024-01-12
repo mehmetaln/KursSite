@@ -29,6 +29,8 @@ urlpatterns = [
     path('all/o/<oslug>', allkursPage, name = "allkursPage2"),
     path('all/i/<pslug>', allkursPage, name = "allkursPage3"),
     path('all/f/<fslug>', allkursPage, name = "allkursPage4"),
+    path('detail/<kid>', detailPage, name = "detailPage"),
+    
     
     
     # USER

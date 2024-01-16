@@ -30,6 +30,7 @@ urlpatterns = [
     path('all/i/<pslug>', allkursPage, name = "allkursPage3"),
     path('all/f/<fslug>', allkursPage, name = "allkursPage4"),
     path('detail/<kid>', detailPage, name = "detailPage"),
+    path('emailPage/', emailPage, name = "emailPage"),
     
     
     

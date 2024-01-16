@@ -78,3 +78,6 @@ def allkursPage(request, oslug=None, pslug=None, fslug=None):
     return render(request, "allkurs.html", context)
 
 
+def emailPage(request):
+    context = {}
+    return render(request,"email.html",context)

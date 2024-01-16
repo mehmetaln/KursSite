@@ -189,14 +189,14 @@ def hesapPage(request):
             else:
                 messages.error(request,"Bos bırakılan yerler var")
                 
-        elif submit == "imagesubmit":
-            image=request.FILES['image']
+        elif submit == "imageSubmit":
+            profile_image=request.POST.get("profile_image")
             password =request.POST.get("password")
-            if image and password:
+            if profile_image and password:
                 if request.user.check_password(password):
-                    request.user.image = image
-                    request.user.save()
-                    messages.success(request,"PRofil Fotografınız değiştirildi")
+                    request.user.usermy.profile_image = profile_image
+                    request.user.usermy.save()
+                    messages.success(request,"Profil Fotografınız değiştirildi")
                     return redirect("hesapPage")
                 else:
                     messages.error(request,"Girilen şifre yanlış")
@@ -208,5 +208,6 @@ def hesapPage(request):
 
         
                 
-    context = {}
+    context = {
+    }
     return render(request,"user/hesap.html",context)

@@ -28,7 +28,7 @@
             <a class="nav-link" href="{% url 'allkursPage' %}">Tüm Eğitimler</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Coursera'da Eğitim Verin</a>
+            <a class="nav-link" href="{% url 'contentPage' %}">Coursera'da Eğitim Verin</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Satın Aldıklarım</a>
@@ -105,10 +105,9 @@
               aria-expanded="false"
             >
               <img
-                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                src="{{ request.user.usermy.profile_image.url }}"
                 class="rounded-circle"
                 height="25"
-                alt="Black and White Portrait of a Man"
                 loading="lazy"
               />
             </a>

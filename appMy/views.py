@@ -7,6 +7,7 @@ from django.contrib.auth.models import User # User modelinin tüm objelerini get
 from django.contrib import messages # Mesaj gondermek için kullanıyoz
 from django.core.mail import send_mail # bu fonksiyonu mail göndermek için kullanıyoruz views kısmında
 from KursSite.settings import EMAIL_HOST_USER # settingsden çektigimiz host kısmımız bunu send mail içerisinde kullanacağız
+from appUser.forms import KursForm  # Kurs form kullanıcıların kendi adlarına ders kurs paylaşabilmelerini sağlar bu kursformmu formspynden çekiyoruz
 # def browsePage(request):
 #     context= {}
 #     return render(request,"browse.html", context)
@@ -109,3 +110,49 @@ def emailPage(request):
         return redirect("emailPage")             
     context = {}
     return render(request,"email.html",context)
+
+def contentPage(request):
+    if request.method =="POST":
+        form = KursForm(request.POST,request.FILES)
+        if form.is_valid(): # Buradaki is_valid tüm zorunlu alanların doldurulup doldurulmadıgını kontrol etmek için 
+            new_kurs =form.save(commit=False) # veri tabanına hemen bir şeyler kaydetmemize yarayan özellik çok önemli mi billemiyorum burada new kursa formu kaydediyoruz 
+            new_kurs.user =request.user # Şuanki kullanıcıya atama yapamıza yardımcı olur  şuanki kullanıcıya kaydettiğimiz formu atıyoruz
+            new_kurs.save() # en son kursu kaydediyoruz sayfamıza gidiyor
+            messages.success(request,"Kurs Başarı ile eklendi ")
+            return redirect('/')
+        else:
+            messages.error(request,"Form Geçerli degil, Lütfen gerekli bilgileri Doldurunuz")
+    else:
+        form =KursForm() 
+    context = {'form':form}
+    return render (request,"mycontent.html",context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+# image = request.POST.get("image")
+# title = request.POST.get("title")
+# price = request.POST.get("price")
+# okategori = request.POST.get("okategori")
+# ykategori = request.POST.get("ykategori")
+# province = request.POST.get("province")
+# text = request.POST.get("text")
+# if title and price and okategori and text:
+    
+#     newKurs=Kurs(image=image,title=title,price=price, onlinecategory = okategori, facetofacecategory = ykategori, province = province, text=text)
+
+# try:
+#     newKurs.save()
+#     messages.success(request, "Kurs başarıyla eklendi.")
+# except:
+#     messages.error(request, f"Kurs eklenirken hata oluştu: {e}")
+#     return redirect('contentPage')

@@ -35,9 +35,9 @@ class Kurs(models.Model):
     onlinecategory = models.ForeignKey(OnlineCategory, verbose_name=("Online Kategori"), blank =True, null =True, on_delete=models.CASCADE)
     facetofacecategory = models.ForeignKey(FacetoFaceCategory, verbose_name=("Yüz Yüze KAtegori"), blank = True, null =True, on_delete=models.CASCADE)
     title = models.CharField(("Başlik"), max_length=50)
-    puan = models.IntegerField(("Puan"), default=0)
+    puan = models.IntegerField(("Puan"), default=0, blank = True)
     price = models.IntegerField(("Fiyat"), default=0)
-    image = models.ImageField(("Resim"), upload_to="kurs",)    
+    image = models.ImageField(("Resim"), upload_to="kurs", blank=True)    
     province = models.ForeignKey(Province, verbose_name=("Province"), blank =True, null = True, on_delete=models.CASCADE)
     text = models.TextField(("Acıklama"), max_length=5000, default = "-",)
     def __str__(self):

@@ -31,6 +31,7 @@ urlpatterns = [
     path('all/f/<fslug>', allkursPage, name = "allkursPage4"),
     path('detail/<kid>', detailPage, name = "detailPage"),
     path('emailPage/', emailPage, name = "emailPage"),
+    path('contentPage/', contentPage, name = "contentPage"),
     
     
     

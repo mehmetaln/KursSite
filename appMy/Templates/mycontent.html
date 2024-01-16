@@ -6,7 +6,38 @@
 
 <div class="container">
     <h1 class="my-3">Yeni Ürün Ekle</h1>
-    <!-- <form method="POST">
+   
+     <form method="POST" enctype="multipart/form-data"> 
+        <!-- enctype="multipart/form-data" ifadesi, HTML formunun dosya yüklemesi içerdiğini belirtir. Bu, dosya yükleme işlemleri için gerekli olan bir özelliktir.
+        Django'da dosya yüklemesi için kullanılan ImageField veya FileField gibi alanlar bulunuyorsa, bu özellik kullanılmalıdır. -->
+        {% csrf_token %}
+        {{ form.as_p }}
+        <!-- as_p bir Django formunu HTML'de bir paragraf içindeki tüm alanları içeren bir temsil (representation) olarak döndürmek için kullanılan bir Form metotudur. {{ form.as_p }}, formdaki tüm alanları düzenli bir şekilde sıralı bir
+        şekilde paragraf (p) etiketleri içinde render eder. Bu, genellikle basit ve düzenli bir form görünümü elde etmek için kullanılır. -->
+        <button type="submit">Kurs Oluştur</button>
+    </form>
+    </div>
+
+
+
+{% endblock body %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- <form method="POST">
         {% csrf_token %}
 
         <h3>Coursera'da Kendi Eğitim İçeriğini oLuştur</h3>
@@ -42,17 +73,3 @@
 
     </form>
      -->
-     <form method="POST" enctype="multipart/form-data"> 
-        <!-- enctype="multipart/form-data" ifadesi, HTML formunun dosya yüklemesi içerdiğini belirtir. Bu, dosya yükleme işlemleri için gerekli olan bir özelliktir.
-        Django'da dosya yüklemesi için kullanılan ImageField veya FileField gibi alanlar bulunuyorsa, bu özellik kullanılmalıdır. -->
-        {% csrf_token %}
-        {{ form.as_p }}
-        <!-- as_p bir Django formunu HTML'de bir paragraf içindeki tüm alanları içeren bir temsil (representation) olarak döndürmek için kullanılan bir Form metotudur. {{ form.as_p }}, formdaki tüm alanları düzenli bir şekilde sıralı bir
-        şekilde paragraf (p) etiketleri içinde render eder. Bu, genellikle basit ve düzenli bir form görünümü elde etmek için kullanılır. -->
-        <button type="submit">Kurs Oluştur</button>
-    </form>
-    </div>
-
-
-
-{% endblock body %}

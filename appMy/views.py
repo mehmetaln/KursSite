@@ -113,7 +113,7 @@ def emailPage(request):
 
 def contentPage(request):
     if request.method =="POST":
-        form = KursForm(request.POST,request.FILES)
+        form = KursForm(request.POST,request.FILES) # Burada ki Files kısmı resimler veya dosyalar için
         if form.is_valid(): # Buradaki is_valid tüm zorunlu alanların doldurulup doldurulmadıgını kontrol etmek için 
             new_kurs =form.save(commit=False) # veri tabanına hemen bir şeyler kaydetmemize yarayan özellik çok önemli mi billemiyorum burada new kursa formu kaydediyoruz 
             new_kurs.user =request.user # Şuanki kullanıcıya atama yapamıza yardımcı olur  şuanki kullanıcıya kaydettiğimiz formu atıyoruz

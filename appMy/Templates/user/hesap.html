@@ -117,7 +117,8 @@
                             <div>
                                 <a class="my-3 fw-bold" href="#">Profil Resmi:</a>
                             </div>
-                                <img style="width: 100px; height: 100px;"  src="{{ request.user.usermy.profile_image.url }}" alt=""> 
+                                <img style="width: 100px; height: 100px;"  src="{{ request.user.usermy.profile_image.url }}" alt="">  
+                                <!-- Girişli olan kullanının fotografını görüntüler -->
                         </div>
                         <!-- Modal Profil Resmi Change --> 
                         <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -127,7 +128,7 @@
                             <h5 class="modal-title" id="exampleModalLabel">Profil Resmini Değiştir</h5>
                             <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form method="POST" >
+                            <form method="POST" enctype="multipart/form-data" >
                                 {% csrf_token %}
                                 <div class="modal-body d-flex flex-column gap-3">
                                     <input type="file" name="profile_image" id="">

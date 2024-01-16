@@ -189,20 +189,23 @@ def hesapPage(request):
             else:
                 messages.error(request,"Bos bırakılan yerler var")
                 
-        elif submit == "imageSubmit":
-            profile_image=request.POST.get("profile_image")
-            password =request.POST.get("password")
-            if profile_image and password:
-                if request.user.check_password(password):
-                    request.user.usermy.profile_image = profile_image
-                    request.user.usermy.save()
-                    messages.success(request,"Profil Fotografınız değiştirildi")
-                    return redirect("hesapPage")
-                else:
-                    messages.error(request,"Girilen şifre yanlış")
+    imagesubmit = request.POST.get("submit") # Eger profil fotografı değiştireceksem yani dıaşrıdan bir fotograf veya belge gelcekse methodumuz post
+     #fakat yüklenen belge veya fotograf için files methodunu kullnamma gerekiyor
+    if imagesubmit == "imageSubmit":
+        profile_image=request.FILES.get("profile_image") # ÖRnekte ki gibi
+        password =request.POST.get("password")
+        
+        if profile_image and password:
+            if request.user.check_password(password):
+                request.user.usermy.profile_image = profile_image
+                request.user.usermy.save()
+                messages.success(request,"Profil Fotografınız değiştirildi")
+                return redirect("hesapPage")
             else:
-                messages.error(request,"Boş Bırakılan alanlar var")
-                
+                messages.error(request,"Girilen şifre yanlış")
+        else:
+            messages.error(request,"Boş Bırakılan alanlar var")
+            
                 
         return redirect("hesapPage")
 

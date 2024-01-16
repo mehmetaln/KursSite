@@ -39,6 +39,7 @@ urlpatterns = [
     path('register/',registerPage, name="registerPage"),
     path('logout/user/',logoutUser,name="logoutUser"),
     path('hesap/',hesapPage, name='hesapPage'),
+    path('emailActive/<elink>',emailActive, name='emailActive'),
     
     
     

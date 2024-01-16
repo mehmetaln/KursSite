@@ -1,10 +1,12 @@
-from django.shortcuts import render
-from appMy.models import *
-from django.db.models import Count
-from django.db.models import Q
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
-from django.contrib import messages # kullanıc"
+from django.shortcuts import render, redirect # return sabit kullandıgımız render ettiğimiz yerlerde eger bir sayfası varsa render kullanıoruz oksa ise redirect kullanıırz oda yönlendirme için 
+from appMy.models import * # appmy içerisindeki tüm her şeyi getirmemize yarar
+from django.db.models import Count # Bir karekteri kaç kez yazdıgımıza dair sorgular yapmmıza yarar
+from django.db.models import Q # ve bağlacını kullanmamıza yarar baızyerlerde
+from django.contrib.auth import authenticate, login, logout # girişçıkış ve kontrol işlemlerimiz gerçekleştirmemize yarar
+from django.contrib.auth.models import User # User modelinin tüm objelerini getirmemize ve bu sayfada kullanmamız a yarar
+from django.contrib import messages # Mesaj gondermek için kullanıyoz
+from django.core.mail import send_mail # bu fonksiyonu mail göndermek için kullanıyoruz views kısmında
+from KursSite.settings import EMAIL_HOST_USER # settingsden çektigimiz host kısmımız bunu send mail içerisinde kullanacağız
 # def browsePage(request):
 #     context= {}
 #     return render(request,"browse.html", context)
@@ -79,5 +81,31 @@ def allkursPage(request, oslug=None, pslug=None, fslug=None):
 
 
 def emailPage(request):
+    
+    users =User.objects.all().values("email") # User objemizin içerisindeki values degeri email olan tüm kullanıcıların maillerini getirmeye yarar
+    users_list = [] # boş liste tanımlıyoruz buryaa atacagız valuesden gelen egerleri
+    
+    
+    for i in list(users): # usersda ki degerleri listeye dönüştürüyoruz 
+        users_list.append(i["email"]) # daha sonra listeyi append methoduyla emaile karşılık gelenleri users_liste gönderiyoruz
+    
+    if request.method == "POST": # Burada formumuzun methodunu kontrol ediyoruz 
+        
+        konu = request.POST.get("konu") #name leri çekiyoruz
+        mesaj = request.POST.get("mesaj") # diger nameyi çekiyoruz
+        
+        if konu and mesaj:
+            try: # try yani dene
+                send_mail(  # Bu kısım email gönderme toplu veya tekli olarak görndermemize yarayan kısımdır öncelikle send maili çekmemizgerekiyor
+                    konu, # bu kısıma ise name konu olan bölümü çekiyoruz
+                    mesaj, # bu kısıma ise namei mesaj olan kısmı çekiyoruz
+                    EMAIL_HOST_USER, # bu kısmı çekmek için once settings ayarlarını çekmemiz gerekiyor bu bizim mail gönderebilmemiz için gerekli olan host bölgesi
+                    users_list, # burada for ile donderdigimiz user modelinin valuesi email olan degerler tutulur
+                    fail_silently =False, # bunu valla bilmiyırum ama gerekli hata ile ilgili galiba
+                )
+                messages.success(request,"Mesajınız Başarı işe iletildi")
+            except:# try olmassa bunu denicek bunlar bizim hata mesajlarından kaçmamıza yarar
+                messages.error(request,"Mesajınız gönderilemedi")
+        return redirect("emailPage")             
     context = {}
     return render(request,"email.html",context)

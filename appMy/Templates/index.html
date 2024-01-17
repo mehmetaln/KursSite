@@ -106,7 +106,7 @@
           </div>
           <div class="card-body" style="display: flex; justify-content: space-between;">
             <a href="{% url 'detailPage' i.id %}" class="card-link text-primary"><i class="fa-solid fa-comments"></i>{{ i.comment_num}} </a>
-            <a href="{% url 'detailPage' i.id %}" class="card-link text-danger"><i class="fa-solid fa-heart"></i>{{ i.likes.count}} </a>
+            <a href="{% url 'detailPage' i.id %}" class="card-link text-danger"><i class="fa-solid fa-heart"></i>{{ i.likes}} </a>
           </div>
           <div class="card-body">
             <a href="{% url 'detailPage' i.id %}" class="card-link text-black">{{ i.price }}  ₺ </a>

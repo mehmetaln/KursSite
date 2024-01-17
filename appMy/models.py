@@ -42,8 +42,9 @@ class Kurs(models.Model):
     province = models.ForeignKey(Province, verbose_name=("Province"), blank =True, null = True, on_delete=models.CASCADE)
     text = models.TextField(("Acıklama"), max_length=5000, default = "",)
     comment_num = models.IntegerField(("Yorum Sayısı"), default=0)
-    likes = models.ManyToManyField(User, verbose_name=("Begenen Kullanıcılar"), related_name="user2", blank=True) # userm odeli ile ilşlkilendişriyoruz
-    
+    # likes = models.ManyToManyField(User, verbose_name=("Begenen Kullanıcılar"), related_name="user2", blank=True) # userm odeli ile ilşlkilendişriyoruz
+    likes = models.IntegerField(("Begeni Sayısı"), default = 0)
+    # likes_num = models.IntegerField(("Begeni Sayısı"),default=0)
     
     
     def __str__(self):

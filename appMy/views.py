@@ -20,17 +20,28 @@ def detailPage(request,kid):
     
     if request.method == "POST":
         
-        
+        submit =request.POST.get("submit")
         text = request.POST.get("text")
         
-        if kurs_list.exists(): # ilgili bir kurs varmı kontrol eder
-            kurs = kurs_list.first()      
-            comment = Comment(text=text, kurs= kurs, user =request.user)
-            comment.save()
-               
-            kurs.comment_num +=1
-            kurs.save()
-    
+        if submit =="commentSubmit":
+            if kurs_list.exists(): # ilgili bir kurs varmı kontrol eder
+                kurs = kurs_list.first()      
+                comment = Comment(text=text, kurs= kurs, user =request.user)
+                comment.save()
+                
+                kurs.comment_num +=1
+                kurs.save()
+        if submit =="likeSubmit":
+                if kurs_list.exists(): # kurs listesini kontrol et bu formu gönderen bir kurs varmı diye
+                    kurs =kurs_list.first()#first(), bir QuerySet'ten ilk öğeyi (veya belirli bir sıra veya filtreleme kriterine göre ilk öğeyi) almak için kullanılan bir metodudur.
+                    if kurs.likes.filter(id=request.user.id).exists():
+                      return HttpResponse("Bu kurs daha önce beğenilmiş.")
+                    else:   
+                        kurs.likes += 1
+                        
+                        kurs.save()
+                    
+                
         
     context = {
         "comment_list":comment_list,
@@ -49,7 +60,7 @@ def indexPage(request):
     facetofacecategory_list =FacetoFaceCategory.objects.all()
     province_list = Province.objects.all()
     kurs_comments = Kurs.objects.all().order_by("-comment_num")
-    kurs_likes = Kurs.objects.annotate(q_count = Count('likes')).order_by("-q_count") 
+    kurs_likes = Kurs.objects.all().order_by("-likes")
     kgelisim = Kurs.objects.filter(onlinecategory__title ="Kişisel Gelişim")  #Bu ksıımda kategorileri tek tek ana sayfamda bellialanlarda gösterebiliyorum
     yazilim = Kurs.objects.filter(onlinecategory__title = "Yazılım") #Bu ksıımda kategorileri tek tek ana sayfamda bellialanlarda gösterebiliyorum
     savunma_sanatlari = Kurs.objects.filter(facetofacecategory__title = "Savunma Sanatları") #Bu ksıımda kategorileri tek tek ana sayfamda bellialanlarda gösterebiliyorum

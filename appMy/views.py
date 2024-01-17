@@ -54,6 +54,13 @@ def indexPage(request):
     facetofacecategory_list =FacetoFaceCategory.objects.all()
     province_list = Province.objects.all()
     kurs_comments = Kurs.objects.all().order_by("-comment_num")
+    kurs_likes = Kurs.objects.annotate(q_count = Count('likes')).order_by("-q_count") 
+    # kgelisim = OnlineCategory.objects.filter(slug ="Kisisel-Gelisim")
+
+    #count(), Django ORM'de kullanılan bir QuerySet yöntemidir ve bir QuerySet içindeki öğelerin sayısını döndürmek için kullanılır. 
+    # Bu metodun kullanımı oldukça basittir ve genellikle veri sayma işlemlerinde kullanılır.
+    #annotate fonksiyonu, Django ORM'de kullanılan ve sorgulanan veri kümesini zenginleştirmek için kullanılan bir fonksiyondur. 
+    # annotate, QuerySet içindeki her bir öğe için özel hesaplamalar yapmanızı sağlar ve bu hesaplamaları yeni bir alan olarak ekler.
     context = {
         "kurs_list":kurs_list,
         "onlinecategory_list":onlinecategory_list,
@@ -61,6 +68,8 @@ def indexPage(request):
         "kurs_random_list": kurs_random_list[:8],
         "province_list":province_list,
         "kurs_comments":kurs_comments[:4],
+        "kurs_likes":kurs_likes[:4],
+        "kgelisim":kgelisim,
     }
     return render(request, "index.html",context)
 

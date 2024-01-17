@@ -44,8 +44,8 @@
          <div style="display: block; justify-content: start;">
           </div>
           <div class="card-body" style="display: flex; justify-content: space-between;">
-            <a href="{% url 'detailPage' i.id %}" class="card-link text-black">{{ i.puan }} <i class="fa-solid fa-star text-warning "></i></a>
             <a href="{% url 'detailPage' i.id %}" class="card-link text-primary"><i class="fa-solid fa-comments"></i>{{ i.comment_num}} </a>
+            <a href="{% url 'detailPage' i.id %}" class="card-link text-danger"><i class="fa-solid fa-heart"></i>{{ i.likes.count}} </a>
           </div>
           <div class="card-body">
             <a href="{% url 'detailPage' i.id %}" class="card-link text-black">{{ i.price }}  ₺ </a>
@@ -75,8 +75,9 @@
            <div style="display: block; justify-content: start;">
             </div>
             <div class="card-body" style="display: flex; justify-content: space-between;">
-              <a href="{% url 'detailPage' i.id %}" class="card-link text-black">{{ i.puan }} <i class="fa-solid fa-star text-warning "></i></a>
               <a href="{% url 'detailPage' i.id %}" class="card-link text-primary"><i class="fa-solid fa-comments"></i>{{ i.comment_num}} </a>
+              <a href="{% url 'detailPage' i.id %}" class="card-link text-danger"><i class="fa-solid fa-heart"></i>{{ i.likes.count}} </a>
+
             </div>
             <div class="card-body">
               <a href="{% url 'detailPage' i.id %}" class="card-link text-black">{{ i.price }}  ₺ </a>
@@ -94,7 +95,60 @@
     <div class="row my-5">
       <h2>En Çok Begeni Alanlar</h2>
       <hr>
-
+      {% for i in kurs_likes  %}
+      <div class="col-2" style="margin-right: 6rem; margin-top: 1rem;">
+        <div class="" style="width: 18rem;">
+          <a href="{% url 'detailPage' i.id %}"><img src="{{i.image.url}}" class= "card-img-top"/></a>
+          <div class="card-body my-2">
+            <h6 class="card-title fw-bold"><a href="{% url 'detailPage' i.id %}">{{ i.title | truncatechars:75}}</a></h6>
+          </div>
+         <div style="display: block; justify-content: start;">
+          </div>
+          <div class="card-body" style="display: flex; justify-content: space-between;">
+            <a href="{% url 'detailPage' i.id %}" class="card-link text-primary"><i class="fa-solid fa-comments"></i>{{ i.comment_num}} </a>
+            <a href="{% url 'detailPage' i.id %}" class="card-link text-danger"><i class="fa-solid fa-heart"></i>{{ i.likes.count}} </a>
+          </div>
+          <div class="card-body">
+            <a href="{% url 'detailPage' i.id %}" class="card-link text-black">{{ i.price }}  ₺ </a>
+          </div>
+          <div class="card-body">
+            <a href="{% url 'detailPage' i.id %}" class="card-link text-black">{{ i.category }}</a>
+          </div>
+          <div class="card-body">
+            <a href="{% url 'detailPage' i.id %}" class="card-link text-primary">{{ i.user}}</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+    <div class="row my-5">
+      <h2> Sizin için Kişisel Gelişim Kursları </h2>
+      <hr>
+      {% for i in kgelisim  %}
+      <div class="col-2" style="margin-right: 6rem; margin-top: 1rem;">
+        <div class="" style="width: 18rem;">
+          <a href="{% url 'detailPage' i.id %}"><img src="{{i.image.url}}" class= "card-img-top"/></a>
+          <div class="card-body my-2">
+            <h6 class="card-title fw-bold"><a href="{% url 'detailPage' i.id %}">{{ i.title | truncatechars:75}}</a></h6>
+          </div>
+         <div style="display: block; justify-content: start;">
+          </div>
+          <div class="card-body" style="display: flex; justify-content: space-between;">
+            <a href="{% url 'detailPage' i.id %}" class="card-link text-primary"><i class="fa-solid fa-comments"></i>{{ i.comment_num}} </a>
+            <a href="{% url 'detailPage' i.id %}" class="card-link text-danger"><i class="fa-solid fa-heart"></i>{{ i.likes.count}} </a>
+          </div>
+          <div class="card-body">
+            <a href="{% url 'detailPage' i.id %}" class="card-link text-black">{{ i.price }}  ₺ </a>
+          </div>
+          <div class="card-body">
+            <a href="{% url 'detailPage' i.id %}" class="card-link text-black">{{ i.category }}</a>
+          </div>
+          <div class="card-body">
+            <a href="{% url 'detailPage' i.id %}" class="card-link text-primary">{{ i.user}}</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
     </div>
   </div>
 

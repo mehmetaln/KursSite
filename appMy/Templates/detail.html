@@ -14,7 +14,7 @@
             <h2>{{ i.title }}</h2>
             <div class="text-black">{{ i.text }}</div>   
             <div style="display: flex; justify-content:space-between ;">
-                <div class="text-black fw-bold fs-5">{{ i.puan }} <i class="fa-solid fa-star text-warning "></i></div>
+                <a href="{% url 'detailPage' i.id %}" class="card-link text-danger"><i class="fa-solid fa-heart"></i>{{ i.likes.count}} </a>
                 <div class="text-primary fw-bold fs-5">{{ i.user }}</div>
             </div>
         </section>        
@@ -69,7 +69,7 @@
                                <div style="display: block; justify-content: start;">
                                 </div>
                                 <div class="card-body">
-                                  <a href="{% url 'detailPage' i.id %}" class="card-link text-black">{{ i.puan }} <i class="fa-solid fa-star text-warning "></i></a>
+                                    <a href="{% url 'detailPage' i.id %}" class="card-link text-danger"><i class="fa-solid fa-heart"></i>{{ i.likes.count}} </a>
                                 </div>
                                 <div class="card-body">
                                   <a href="{% url 'detailPage' i.id %}" class="card-link text-black">{{ i.price }}  ₺ </a>

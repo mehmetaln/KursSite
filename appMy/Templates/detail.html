@@ -14,8 +14,14 @@
             <h2>{{ i.title }}</h2>
             <div class="text-black">{{ i.text }}</div>   
             <div style="display: flex; justify-content:space-between ;">
-                <a href="{% url 'detailPage' i.id %}" class="card-link text-danger"><i class="fa-solid fa-heart"></i>{{ i.likes.count}} </a>
-                <div class="text-primary fw-bold fs-5">{{ i.user }}</div>
+                <div >
+                    <a href="{% url 'detailPage' i.id %}" class="card-link text-danger"><i class="fa-solid fa-heart"></i>{{ i.likes.count}} </a>
+                    <a  href="{% url 'detailPage' i.id %}" class="card-link mx-3 text-danger"><i class="fa-solid fa-comments"></i>{{ i.comment_num}} </a>
+                </div>
+                <div>
+                    <div class="text-primary fw-bold fs-5">{{ i.user }}</div>
+                    <div class="text-black fs-5">{{ i.date_now }}</div>
+                </div>
             </div>
         </section>        
         {% endfor %}

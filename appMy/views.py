@@ -8,11 +8,6 @@ from django.contrib import messages # Mesaj gondermek için kullanıyoz
 from django.core.mail import send_mail # bu fonksiyonu mail göndermek için kullanıyoruz views kısmında
 from KursSite.settings import EMAIL_HOST_USER # settingsden çektigimiz host kısmımız bunu send mail içerisinde kullanacağız
 from appUser.forms import KursForm  # Kurs form kullanıcıların kendi adlarına ders kurs paylaşabilmelerini sağlar bu kursformmu formspynden çekiyoruz
-# def browsePage(request):
-#     context= {}
-#     return render(request,"browse.html", context)
-
-
 
 
 
@@ -40,7 +35,7 @@ def detailPage(request,kid):
     context = {
         "comment_list":comment_list,
         "kurs_list": kurs_list,
-        "kurs_random_list": kurs_random_list[:6]
+        "kurs_random_list": kurs_random_list[:4]
     }
     return render (request,"detail.html",context)
 
@@ -55,7 +50,10 @@ def indexPage(request):
     province_list = Province.objects.all()
     kurs_comments = Kurs.objects.all().order_by("-comment_num")
     kurs_likes = Kurs.objects.annotate(q_count = Count('likes')).order_by("-q_count") 
-    # kgelisim = OnlineCategory.objects.filter(slug ="Kisisel-Gelisim")
+    kgelisim = Kurs.objects.filter(onlinecategory__title ="Kişisel Gelişim")  #Bu ksıımda kategorileri tek tek ana sayfamda bellialanlarda gösterebiliyorum
+    yazilim = Kurs.objects.filter(onlinecategory__title = "Yazılım") #Bu ksıımda kategorileri tek tek ana sayfamda bellialanlarda gösterebiliyorum
+    savunma_sanatlari = Kurs.objects.filter(facetofacecategory__title = "Savunma Sanatları") #Bu ksıımda kategorileri tek tek ana sayfamda bellialanlarda gösterebiliyorum
+    
 
     #count(), Django ORM'de kullanılan bir QuerySet yöntemidir ve bir QuerySet içindeki öğelerin sayısını döndürmek için kullanılır. 
     # Bu metodun kullanımı oldukça basittir ve genellikle veri sayma işlemlerinde kullanılır.
@@ -69,7 +67,9 @@ def indexPage(request):
         "province_list":province_list,
         "kurs_comments":kurs_comments[:4],
         "kurs_likes":kurs_likes[:4],
-        "kgelisim":kgelisim,
+        "kgelisim":kgelisim[:4],
+        "yazilim":yazilim[:4],
+        "savunma_sanatlari":savunma_sanatlari[:4],
     }
     return render(request, "index.html",context)
 
@@ -166,22 +166,3 @@ def contentPage(request):
 
 
 
-
-
-# image = request.POST.get("image")
-# title = request.POST.get("title")
-# price = request.POST.get("price")
-# okategori = request.POST.get("okategori")
-# ykategori = request.POST.get("ykategori")
-# province = request.POST.get("province")
-# text = request.POST.get("text")
-# if title and price and okategori and text:
-    
-#     newKurs=Kurs(image=image,title=title,price=price, onlinecategory = okategori, facetofacecategory = ykategori, province = province, text=text)
-
-# try:
-#     newKurs.save()
-#     messages.success(request, "Kurs başarıyla eklendi.")
-# except:
-#     messages.error(request, f"Kurs eklenirken hata oluştu: {e}")
-#     return redirect('contentPage')

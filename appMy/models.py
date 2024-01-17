@@ -42,7 +42,8 @@ class Kurs(models.Model):
     text = models.TextField(("Acıklama"), max_length=5000, default = "-",)
     comment_num = models.IntegerField(("Yorum Sayısı"), default=0)
     likes = models.ManyToManyField(User, verbose_name=("Begenen Kullanıcılar"), related_name="user2", blank=True) # userm odeli ile ilşlkilendişriyoruz
-    date_now = models.DateTimeField(("Tarih ve Saat"), auto_now_add=True, )
+    
+    
     
     def __str__(self):
         return self.title
@@ -57,3 +58,10 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.kurs.title
+
+class Like(models.Model):
+    user= models.ForeignKey(User, verbose_name=("Begenen Kullanci"), on_delete=models.CASCADE)
+    kurs = models.ForeignKey(Kurs, verbose_name=("Begenilen Kurs"), on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title

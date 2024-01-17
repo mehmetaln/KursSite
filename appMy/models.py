@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 # from mptt.models import MPTTModel, TreeForeignKey
 # from django import forms
 
@@ -54,7 +55,7 @@ class Comment(models.Model):
     user = models.ForeignKey(User, verbose_name=("Kullanıcı"), on_delete=models.CASCADE)
     kurs = models.ForeignKey(Kurs, verbose_name=("Yorum yapılan Kurs"), on_delete=models.CASCADE)
     text = models.CharField(("Yorum"), max_length=50)
-    date_now = models.DateTimeField(("Tarih ve Saat"),  auto_now_add=True)
+    date_now = models.DateTimeField(("Tarih ve Saat"), )
     
     def __str__(self):
         return self.kurs.title

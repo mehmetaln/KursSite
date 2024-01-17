@@ -33,7 +33,8 @@ def detailPage(request,kid):
             comment = Comment(text=text, kurs= kurs, user =request.user)
             comment.save()
                
-    
+            kurs.comment_num +=1
+            kurs.save()
     
         
     context = {
@@ -52,13 +53,14 @@ def indexPage(request):
     onlinecategory_list =OnlineCategory.objects.all()
     facetofacecategory_list =FacetoFaceCategory.objects.all()
     province_list = Province.objects.all()
-    
+    kurs_comments = Kurs.objects.all().order_by("-comment_num")
     context = {
         "kurs_list":kurs_list,
         "onlinecategory_list":onlinecategory_list,
         "facetofacecategory_list":facetofacecategory_list,
         "kurs_random_list": kurs_random_list[:8],
-        "province_list":province_list
+        "province_list":province_list,
+        "kurs_comments":kurs_comments[:4],
     }
     return render(request, "index.html",context)
 

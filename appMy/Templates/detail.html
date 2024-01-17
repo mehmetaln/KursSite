@@ -80,6 +80,9 @@
                                 <div class="card-body">
                                   <a href="{% url 'detailPage' i.id %}" class="card-link text-primary">{{ i.user}}</a>
                                 </div>
+                                <div class="card-body">
+                                  <a href="{% url 'detailPage' i.id %}" class="card-link text-primary">{{ i.comment_num}}</a>
+                                </div>
                               </div>
                             </div>
                             {% endfor %}

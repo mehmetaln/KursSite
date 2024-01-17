@@ -40,6 +40,8 @@ class Kurs(models.Model):
     image = models.ImageField(("Resim"), upload_to="kurs")    
     province = models.ForeignKey(Province, verbose_name=("Province"), blank =True, null = True, on_delete=models.CASCADE)
     text = models.TextField(("Acıklama"), max_length=5000, default = "-",)
+    comment_num = models.IntegerField(("Yorum Sayısı"), default=0)
+    
     def __str__(self):
         return self.title
 

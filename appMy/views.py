@@ -20,8 +20,26 @@ from appUser.forms import KursForm  # Kurs form kullanıcıların kendi adların
 
 def detailPage(request,kid):
     kurs_list = Kurs.objects.filter(id=kid)
+    comment_list = Comment.objects.filter(kurs =kurs_list.first())
+    kurs_random_list = Kurs.objects.all().order_by("?")
+    
+    if request.method == "POST":
+        
+        
+        text = request.POST.get("text")
+        
+        if kurs_list.exists(): # ilgili bir kurs varmı kontrol eder
+            kurs = kurs_list.first()      
+            comment = Comment(text=text, kurs= kurs, user =request.user)
+            comment.save()
+               
+    
+    
+        
     context = {
-        "kurs_list": kurs_list
+        "comment_list":comment_list,
+        "kurs_list": kurs_list,
+        "kurs_random_list": kurs_random_list[:6]
     }
     return render (request,"detail.html",context)
 

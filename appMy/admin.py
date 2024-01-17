@@ -20,4 +20,5 @@ class CustomUser(UserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User,CustomUser)
+admin.site.register(Comment)
     

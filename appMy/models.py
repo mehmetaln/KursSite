@@ -37,8 +37,19 @@ class Kurs(models.Model):
     title = models.CharField(("Başlik"), max_length=50)
     puan = models.IntegerField(("Puan"), default=0, blank = True)
     price = models.IntegerField(("Fiyat"), default=0)
-    image = models.ImageField(("Resim"), upload_to="kurs", blank=True)    
+    image = models.ImageField(("Resim"), upload_to="kurs")    
     province = models.ForeignKey(Province, verbose_name=("Province"), blank =True, null = True, on_delete=models.CASCADE)
     text = models.TextField(("Acıklama"), max_length=5000, default = "-",)
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    
+    user = models.ForeignKey(User, verbose_name=("Kullanıcı"), on_delete=models.CASCADE)
+    kurs = models.ForeignKey(Kurs, verbose_name=("Yorum yapılan Kurs"), on_delete=models.CASCADE)
+    text = models.CharField(("Yorum"), max_length=50)
+    date_now = models.DateTimeField(("Tarih ve Saat"),  auto_now_add=True)
+    
+    def __str__(self):
+        return self.kurs.title

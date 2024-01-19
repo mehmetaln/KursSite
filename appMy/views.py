@@ -40,12 +40,12 @@ def detailPage(request,kid):
                     
                 
         
-    # context = {
-    #     "comment_list":comment_list,
-    #     "kurs_list": kurs_list,
-    #     "kurs_random_list": kurs_random_list[:4]
-    # }
-    # return render (request,"detail.html",context)
+    context = {
+        "comment_list":comment_list,
+        "kurs_list": kurs_list,
+        "kurs_random_list": kurs_random_list[:4]
+    }
+    return render (request,"detail.html",context)
 
 
 

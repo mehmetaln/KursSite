@@ -34,21 +34,18 @@ def detailPage(request,kid):
         if submit =="likeSubmit":
                 if kurs_list.exists(): # kurs listesini kontrol et bu formu gönderen bir kurs varmı diye
                     kurs =kurs_list.first()#first(), bir QuerySet'ten ilk öğeyi (veya belirli bir sıra veya filtreleme kriterine göre ilk öğeyi) almak için kullanılan bir metodudur.
-                    if kurs.likes.filter(id=request.user.id).exists():
-                      return HttpResponse("Bu kurs daha önce beğenilmiş.")
-                    else:   
-                        kurs.likes += 1
-                        
-                        kurs.save()
+
+                    kurs.likes += 1
+                    kurs.save()
                     
                 
         
-    context = {
-        "comment_list":comment_list,
-        "kurs_list": kurs_list,
-        "kurs_random_list": kurs_random_list[:4]
-    }
-    return render (request,"detail.html",context)
+    # context = {
+    #     "comment_list":comment_list,
+    #     "kurs_list": kurs_list,
+    #     "kurs_random_list": kurs_random_list[:4]
+    # }
+    # return render (request,"detail.html",context)
 
 
 

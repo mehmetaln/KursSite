@@ -24,11 +24,12 @@
                                         <p >{{ i.kurs.comment_num }} <i class="text-primary fa-solid fa-comments"></i></p>
                                     </div>
                                     <!-- <div style="position: relative;">
-                                            <small style="position: absolute; top: 30%; right: 40%;">{{ i.kurs.facetofacecategory }}</small>
+                                        <small style="position: absolute; top: 30%; right: 40%;">{{ i.kurs.facetofacecategory }}</small>
                                     </div> -->
                                 </div>
                                 <div class="d-flex flex-column gap-3">
-                                <div> <a href="{% url 'sepetDelete' i.id %}" class="w-100 btn btn-danger">Sil</a> </div>
+                                    <div> <a href="{% url 'sepetDelete' i.id %}" class="w-100 btn btn-danger">Sil</a> </div>
+                                    <div> <a href="{% url 'satinAl' a.id %}" class="btn btn-success">Satın Al</a></div>
                             </div>
                             <div>
                                 <div class="fw-bold" style="color:blueviolet;">₺ {{ i.kurs.price }}</div>
@@ -38,10 +39,8 @@
                     <hr>
                     {% endfor %}
                     
-                    {% for a in sepet_list  %}
-                    <div> <a href="{% url 'satinAl' a.id %}" class="btn btn-success">Satın Al</a></div>
-                    
-                    {% endfor %}
+        
+
                         
                     </div>
                 </div>

@@ -40,7 +40,7 @@ class Kurs(models.Model):
     facetofacecategory = models.ForeignKey(FacetoFaceCategory, verbose_name=("Yüz Yüze KAtegori"), blank = True, null =True, on_delete=models.CASCADE)
     title = models.CharField(("Başlik"), max_length=50)
     puan = models.IntegerField(("Puan"), default=0, blank = True)
-    price = models.IntegerField(("Fiyat"), default=0)
+    price = models.FloatField(("Fiyat"), default=0)
     image = models.ImageField(("Resim"), upload_to="kurs")    
     province = models.ForeignKey(Province, verbose_name=("Province"), blank =True, null = True, on_delete=models.CASCADE)
     text = models.TextField(("Acıklama"), max_length=5000, default = "",)
@@ -48,6 +48,7 @@ class Kurs(models.Model):
     # likes = models.ManyToManyField(User, verbose_name=("Begenen Kullanıcılar"), related_name="user2", blank=True) # userm odeli ile ilşlkilendişriyoruz
     likes = models.IntegerField(("Begeni Sayısı"), default = 0)
     # likes_num = models.IntegerField(("Begeni Sayısı"),default=0)
+    
     
     
     def __str__(self):
@@ -70,3 +71,13 @@ class Like(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+class Sepet(models.Model):
+    kurs = models.ForeignKey(Kurs, verbose_name=("Kurs"), on_delete=models.CASCADE)
+    user =models.ForeignKey(User, verbose_name=("Kullanıcı"), on_delete=models.CASCADE)
+    adet =models.IntegerField(("Adet"), default = 0)
+    toplam = models.FloatField(("Toplam Fiyat"), default =0)
+    def __str__(self):
+        return self.user.username
+    

@@ -11,12 +11,31 @@ from appUser.forms import KursForm  # Kurs form kullanıcıların kendi adların
 
 
 
+def sepetPage(request):
+    sepet_list =Sepet.objects.filter(user=request.user) # Girişli olan kullanıcın sepetni ver bana demek  yoksa tğüm hepsinin sepetini veirir
+    
+    
+    
+
+    context = {
+         "sepet_list":sepet_list, 
+
+    }
+    return render(request,"sepet.html",context)
+
+def sepetDelete(request,sid): # silme fonksşyouzmu  sepeti
+    sepet =Sepet.objects.get(id=sid)
+    sepet.delete()
+    
+    return redirect("sepetPage")
 
 
 def detailPage(request,kid):
     kurs_list = Kurs.objects.filter(id=kid)
     comment_list = Comment.objects.filter(kurs =kurs_list.first())
     kurs_random_list = Kurs.objects.all().order_by("?")
+    
+    
     
     if request.method == "POST":
         
@@ -31,19 +50,28 @@ def detailPage(request,kid):
                 
                 kurs.comment_num +=1
                 kurs.save()
-        if submit =="likeSubmit":
-                if kurs_list.exists(): # kurs listesini kontrol et bu formu gönderen bir kurs varmı diye
-                    kurs =kurs_list.first()#first(), bir QuerySet'ten ilk öğeyi (veya belirli bir sıra veya filtreleme kriterine göre ilk öğeyi) almak için kullanılan bir metodudur.
+        elif submit =="likeSubmit":
+            if kurs_list.exists(): # kurs listesini kontrol et bu formu gönderen bir kurs varmı diye
+                kurs =kurs_list.first()#first(), bir QuerySet'ten ilk öğeyi (veya belirli bir sıra veya filtreleme kriterine göre ilk öğeyi) almak için kullanılan bir metodudur.
 
-                    kurs.likes += 1
-                    kurs.save()
-                    
+                kurs.likes += 1
+                kurs.save()
+        elif submit == "sepetSubmit":
+            if kurs_list.exists():
+                kurs= kurs_list.first()
                 
-        
+                adet = int(request.POST.get("adet"))
+                toplam = adet * float(kurs.price)
+                
+                sepet = Sepet(kurs=kurs, user=request.user, adet=adet, toplam=toplam) 
+                sepet.save()
+                return redirect("sepetPage")
+
+
     context = {
         "comment_list":comment_list,
         "kurs_list": kurs_list,
-        "kurs_random_list": kurs_random_list[:4]
+        "kurs_random_list": kurs_random_list[:4],
     }
     return render (request,"detail.html",context)
 
@@ -85,6 +113,8 @@ def indexPage(request):
         "category_province_options_dict": category_province_options_dict,
     }
     return render(request, "index.html",context)
+
+
 
 
 

@@ -22,4 +22,10 @@ admin.site.unregister(User)
 admin.site.register(User,CustomUser)
 admin.site.register(Comment)
 admin.site.register(Like)
-    
+
+@admin.register(Sepet)
+class SepetAdmin(admin.ModelAdmin):
+    list_display = ( 'user','kurs','adet')
+    # search_fields=('kurs__title', 'user__username')
+
+# admin.site.register(Sepet)

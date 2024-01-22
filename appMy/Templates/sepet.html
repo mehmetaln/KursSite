@@ -4,7 +4,44 @@
 
 {% block body %}
     <main>
-        
+        <div class="container">
+            <h2>Alışveriş Sepeti</h2>
+            <hr>
+            <div class="row my-1">
+                <div class="col-8">
+                    {% for i in sepet_list %}
+                    <div class="card my-2" >
+                       <div style="display:flex; justify-content: space-between; height: auto;;" >
+                        <div > 
+                            <img width="auto" height="75px" src="{{ i.kurs.image.url }}" alt="">
+                        </div>
+                        <div class="d-flex justify-content-beetwen">
+                            <div>
+                                <h4 style="height: 21px ;" class="text-black">{{ i.kurs.title | truncatechars:25 }}</h4>
+                                <small style="height: 1px;" class="text-primary">{{ i.kurs.user }}</small>
+                                <p style="height: 3px;">{{ i.kurs.likes }} <i class="text-danger fa-solid fa-heart"></i></p>
+                                <p >{{ i.kurs.comment_num }} <i class="text-primary fa-solid fa-comments"></i></p>
+                            </div>
+                            <!-- <div style="position: relative;">
+                                    <small style="position: absolute; top: 30%; right: 40%;">{{ i.kurs.facetofacecategory }}</small>
+                            </div> -->
+                        </div>
+                        <div class="d-flex flex-column gap-3">
+                           <div> <a href="{% url 'sepetDelete' i.id %}" class="w-100 btn btn-danger">Sil</a> </div>
+                           <div> <a href="" class="btn btn-success">Satın Al</a></div>
+                        </div>
+                        <div>
+                            <div class="fw-bold" style="color:blueviolet;">₺ {{ i.kurs.price }}</div>
+                        </div>
+                       </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-4">
+
+            </div>
+        </div>
     </main>
 {% endblock body %}
     

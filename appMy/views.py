@@ -90,39 +90,39 @@ def indexPage(request):
 
 
 
-# def allkursPage(request, oslug=None, pslug=None, fslug=None):
-#     kurs_list = Kurs.objects.all().order_by('-id')
+def allkursPage(request, oslug=None, pslug=None, fslug=None):
+    kurs_list = Kurs.objects.all().order_by('-id')
 
-#     if oslug:
-#         kurs_list = kurs_list.filter(onlinecategory__yslug=oslug)
+    if oslug:
+        kurs_list = kurs_list.filter(onlinecategory__yslug=oslug)
 
-#     elif fslug:
-#         kurs_list = kurs_list.filter(facetofacecategory__tslug=fslug)
+    elif fslug:
+        kurs_list = kurs_list.filter(facetofacecategory__tslug=fslug)
 
-#     elif pslug:
-#         kurs_list = kurs_list.filter(province__islug=pslug)
+    elif pslug:
+        kurs_list = kurs_list.filter(province__islug=pslug)
 
-#     query = request.GET.get("query")
-#     print("Arama Sorgusu:", query)
-#     if query:
-#         kurs_list = kurs_list.filter(Q(title__icontains=query))
+    query = request.GET.get("query")
+    print("Arama Sorgusu:", query)
+    if query:
+        kurs_list = kurs_list.filter(Q(title__icontains=query))
     
         
     
-#     onlinecategory_list = OnlineCategory.objects.all()
-#     facetofacecategory_list = FacetoFaceCategory.objects.all()
-#     province_list = Province.objects.all()
+    onlinecategory_list = OnlineCategory.objects.all()
+    facetofacecategory_list = FacetoFaceCategory.objects.all()
+    province_list = Province.objects.all()
 
-#     context = {
-#         "kurs_list": kurs_list,
-#         "onlinecategory_list": onlinecategory_list,
-#         "facetofacecategory_list": facetofacecategory_list,
-#         "province_list": province_list,
-#     }
+    context = {
+        "kurs_list": kurs_list,
+        "onlinecategory_list": onlinecategory_list,
+        "facetofacecategory_list": facetofacecategory_list,
+        "province_list": province_list,
+    }
 
-#     return render(request, "allkurs.html", context)
+    return render(request, "allkurs.html", context)
 
-def allkursPage(request, oslug=None, pslug=None, fslug=None):
+# def allkursPage(request, oslug=None, pslug=None, fslug=None):
     kurs_list = Kurs.objects.all().order_by('-id')
 
     if oslug:

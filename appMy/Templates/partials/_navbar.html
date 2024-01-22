@@ -34,23 +34,47 @@
             <a class="nav-link" href="#">Satın Aldıklarım</a>
           </li>
                  <!-- FACE TO FACE CAREGORY -->
-          <li class="nav-item dropdown">
+          <!-- <li class="nav-item dropdown">
             <a data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button" aria-expanded="false">Yüz Yüze Eğitim</a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               {% for i in facetofacecategory_list  %}
-              <li class="a ">
+              <li class="">
                 <div class="d-flex justify-content-beetwen dropend">
                   <a  data-mdb-dropdown-auto-close="False">{{ i.title }}</a>
                   <a class=" btn-secondary  dropdown-toggle dropdown-toggle-split"  data-mdb-dropdown-init  data-mdb-ripple-init  aria-expanded="false"   data-mdb-dropdown-auto-close="False"  ></a> 
                   <ul class="dropdown-menu ">
                     {% for i in province_list %}
-                      <a class="dropdown-item" href="{% url 'allkursPage3' i.islug %}">{{ i.title }}</a>
+                      <li class="dropdown-item" href="{% url 'allkursPage3' i.islug %}" style="list-style: none;">{{ i.title }}</></li>
                     {% endfor %}
                   </ul>
                 </div>
               {% endfor %}
             </li>
-          </ul>
+          </ul> -->
+          <li class="nav-item dropdown">
+            <a data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">Yüz Yüze Eğitim</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for category, province_options in category_province_options_dict.items %}
+                    <li class="dropdown-item">
+                        <div class="d-flex justify-content-between dropend">
+                            <a data-mdb-dropdown-auto-close="False">{{ category.title }}</a>
+                            <a class="btn-secondary dropdown-toggle dropdown-toggle-split" data-mdb-dropdown-init data-mdb-ripple-init aria-expanded="false" data-mdb-dropdown-auto-close="False"></a>
+                            <ul class="dropdown-menu">
+                                {% for province_option in province_options %}
+                                    <li class="dropdown-item" style="list-style: none;">
+                                        <a href="{% url 'allkursPage' pslug=province_option.islug fslug=category.tslug %}">{{ province_option.title }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+         -->
+        
+        
+        
 
         <!-- ONLİNE KATEGORİ -->
 

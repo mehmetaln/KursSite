@@ -62,7 +62,11 @@ def indexPage(request):
     yazilim = Kurs.objects.filter(onlinecategory__title = "Yazılım") #Bu ksıımda kategorileri tek tek ana sayfamda bellialanlarda gösterebiliyorum
     savunma_sanatlari = Kurs.objects.filter(facetofacecategory__title = "Savunma Sanatları") #Bu ksıımda kategorileri tek tek ana sayfamda bellialanlarda gösterebiliyorum
     
-
+    category_province_options_dict = {}
+    for category in facetofacecategory_list:
+        category_province_options_dict[category] = category.province_options.all()
+        
+        
     #count(), Django ORM'de kullanılan bir QuerySet yöntemidir ve bir QuerySet içindeki öğelerin sayısını döndürmek için kullanılır. 
     # Bu metodun kullanımı oldukça basittir ve genellikle veri sayma işlemlerinde kullanılır.
     #annotate fonksiyonu, Django ORM'de kullanılan ve sorgulanan veri kümesini zenginleştirmek için kullanılan bir fonksiyondur. 
@@ -78,6 +82,7 @@ def indexPage(request):
         "kgelisim":kgelisim[:4],
         "yazilim":yazilim[:4],
         "savunma_sanatlari":savunma_sanatlari[:4],
+        "category_province_options_dict": category_province_options_dict,
     }
     return render(request, "index.html",context)
 
@@ -85,7 +90,69 @@ def indexPage(request):
 
 
 
+# def allkursPage(request, oslug=None, pslug=None, fslug=None):
+#     kurs_list = Kurs.objects.all().order_by('-id')
+
+#     if oslug:
+#         kurs_list = kurs_list.filter(onlinecategory__yslug=oslug)
+
+#     elif fslug:
+#         kurs_list = kurs_list.filter(facetofacecategory__tslug=fslug)
+
+#     elif pslug:
+#         kurs_list = kurs_list.filter(province__islug=pslug)
+
+#     query = request.GET.get("query")
+#     print("Arama Sorgusu:", query)
+#     if query:
+#         kurs_list = kurs_list.filter(Q(title__icontains=query))
+    
+        
+    
+#     onlinecategory_list = OnlineCategory.objects.all()
+#     facetofacecategory_list = FacetoFaceCategory.objects.all()
+#     province_list = Province.objects.all()
+
+#     context = {
+#         "kurs_list": kurs_list,
+#         "onlinecategory_list": onlinecategory_list,
+#         "facetofacecategory_list": facetofacecategory_list,
+#         "province_list": province_list,
+#     }
+
+#     return render(request, "allkurs.html", context)
+
 def allkursPage(request, oslug=None, pslug=None, fslug=None):
+    kurs_list = Kurs.objects.all().order_by('-id')
+
+    if oslug:
+        kurs_list = kurs_list.filter(onlinecategory__yslug=oslug)
+
+    elif fslug:
+        kurs_list = kurs_list.filter(facetofacecategory__tslug=fslug)
+
+    elif pslug:
+        kurs_list = kurs_list.filter(province__islug=pslug)
+
+    onlinecategory_list = OnlineCategory.objects.all()
+    facetofacecategory_list = FacetoFaceCategory.objects.all()
+    province_list = Province.objects.all()
+
+    category_province_options_dict = {}
+    for category in facetofacecategory_list:
+        province_options = category.province_options.all()
+        category_province_options_dict[category] = province_options
+
+    context = {
+        "kurs_list": kurs_list,
+        "onlinecategory_list": onlinecategory_list,
+        "facetofacecategory_list": facetofacecategory_list,
+        "province_list": province_list,
+        "category_province_options_dict": category_province_options_dict,
+    }
+
+    return render(request, "allkurs.html", context)
+
     kurs_list = Kurs.objects.all().order_by('-id')
 
     if oslug:
@@ -102,17 +169,22 @@ def allkursPage(request, oslug=None, pslug=None, fslug=None):
     if query:
         kurs_list = kurs_list.filter(Q(title__icontains=query))
     
-        
-    
     onlinecategory_list = OnlineCategory.objects.all()
     facetofacecategory_list = FacetoFaceCategory.objects.all()
     province_list = Province.objects.all()
+
+    category_province_options_dict = {}
+    for category in facetofacecategory_list:
+        province_options = category.province_options.all()
+        print(f"Kategori: {category.title}, İl Seçenekleri: {[province.title for province in province_options]}")
+        category_province_options_dict[category] = province_options
 
     context = {
         "kurs_list": kurs_list,
         "onlinecategory_list": onlinecategory_list,
         "facetofacecategory_list": facetofacecategory_list,
         "province_list": province_list,
+        "category_province_options_dict": category_province_options_dict,
     }
 
     return render(request, "allkurs.html", context)

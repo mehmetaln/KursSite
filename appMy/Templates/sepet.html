@@ -29,15 +29,20 @@
                                 </div>
                                 <div class="d-flex flex-column gap-3">
                                 <div> <a href="{% url 'sepetDelete' i.id %}" class="w-100 btn btn-danger">Sil</a> </div>
-                                <div> <a href="{% url 'satınAl' i.id %}" class="btn btn-success">Satın Al</a></div>
-                                </div>
-                                <div>
-                                    <div class="fw-bold" style="color:blueviolet;">₺ {{ i.kurs.price }}</div>
-                                </div>
+                            </div>
+                            <div>
+                                <div class="fw-bold" style="color:blueviolet;">₺ {{ i.kurs.price }}</div>
                             </div>
                         </div>
-                        <hr>
-                        {% endfor %}
+                    </div>
+                    <hr>
+                    {% endfor %}
+                    
+                    {% for a in sepet_list  %}
+                    <div> <a href="{% url 'satinAl' a.id %}" class="btn btn-success">Satın Al</a></div>
+                    
+                    {% endfor %}
+                        
                     </div>
                 </div>
             </div>

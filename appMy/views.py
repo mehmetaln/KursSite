@@ -15,7 +15,7 @@ def sepetPage(request):
     sepet_list =Sepet.objects.filter(user=request.user) # Girişli olan kullanıcın sepetni ver bana demek  yoksa tğüm hepsinin sepetini veirir
     
     
-    
+ 
 
     context = {
          "sepet_list":sepet_list, 
@@ -26,12 +26,19 @@ def sepetPage(request):
 
 def satinAl(request,bid):
     
-    urun = Kurs.objects.get(id=bid) 
-     
+    urun = Kurs.objects.filter(id=bid) 
+    sepet = Sepet.objects.all()
+  
     messages.success(request,"Başarı ile Alındı")
+    if sepet:
+        sepet.delete()
+        return redirect("sepetPage")
     
-    return redirect("siparisPage")
+   
 def siparisPage(request):
+    
+    
+    
     context ={}
     return render(request,"siparis.html", context)
 

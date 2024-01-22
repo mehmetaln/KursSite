@@ -23,9 +23,22 @@ def sepetPage(request):
     }
     return render(request,"sepet.html",context)
 
+
+def satinAl(request,bid):
+    
+    urun = Kurs.objects.get(id=bid) 
+     
+    messages.success(request,"Başarı ile Alındı")
+    
+    return redirect("siparisPage")
+def siparisPage(request):
+    context ={}
+    return render(request,"siparis.html", context)
+
 def sepetDelete(request,sid): # silme fonksşyouzmu  sepeti
     sepet =Sepet.objects.get(id=sid)
     sepet.delete()
+    
     
     return redirect("sepetPage")
 

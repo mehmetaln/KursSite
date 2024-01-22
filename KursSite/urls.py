@@ -35,6 +35,9 @@ urlpatterns = [
     path('contentPage/', contentPage, name = "contentPage"),
     path('sepetPage/', sepetPage, name = "sepetPage"),
     path('sepetDelete/<sid>', sepetDelete, name = "sepetDelete"),
+    path('satinAl/<bid>', satinAl, name = "satinAl"),
+    path('siparisPage', siparisPage, name = "siparisPage"),
+    
     
     
     

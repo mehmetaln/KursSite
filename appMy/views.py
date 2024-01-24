@@ -75,7 +75,7 @@ def detailPage(request,kid):
                     messages.error(request,"Kurs Bulunamadı")
                     return redirect("detailPage")
             else:
-                messages.warning(request,"Lütfen giriş yapınız.")
+                messages.warning("Lütfen giriş yapınız.")
                 return redirect("loginPage")
                 
         elif submit =="likeSubmit":
@@ -88,7 +88,7 @@ def detailPage(request,kid):
                 else:
                     messages.error(request,"Kurs Bulunamadı")
             else:
-                messages.warning(request, "Lütfen giriş yapınız.")
+                messages.warning( "Lütfen giriş yapınız.")
                 return redirect("loginPage")
 
         elif submit == "sepetSubmit":
@@ -105,7 +105,7 @@ def detailPage(request,kid):
                 else:
                     messages.error(request,"Kurs Bulunamadı")
             else:
-                messages.warning(request,"Lütfen Giriş Yapınız")
+                messages.warning("Lütfen Giriş Yapınız")
                 return redirect("loginPage")
     context = {
         "comment_list":comment_list,

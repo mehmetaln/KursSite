@@ -52,7 +52,7 @@ def registerPage(request):
         password2 = request.POST.get("password2") 
         
         boolnum = boolup = False
-        boolchar = True
+
         if fname and lname and email and username and password1 and password2:
         
             if password1 == password2:

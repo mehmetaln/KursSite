@@ -90,7 +90,7 @@ def registerPage(request):
                     else:
                         messages.error(request,"Bu Kullanıcı Adı ile kayıtlı bir üye var.")
                 else:
-                    messages.error(request,"E-Posta ve Kullanıcı Adı alanları boş bırakılamaz ve paroalnız 6 haneden buyuk olmalı aynı zmanda Tc'niz 11 haneli olmalı")
+                    messages.error(request,"E-Posta ve Kullanıcı Adı alanları boş bırakılamaz ve paroalnız 6 haneden buyuk olmalı aynı zmanda bir büyük harf ve sayı içermeli")
             else:
                 messages.error(request,"Şifreler uyuşmuyor")
         else:

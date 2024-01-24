@@ -34,45 +34,48 @@
             <a class="nav-link" href="{% url 'siparisPage' %}">Satın Aldıklarım</a>
           </li>
                  <!-- FACE TO FACE CAREGORY -->
-          <li class="nav-item dropdown">
-            <a data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button" aria-expanded="false">Yüz Yüze Eğitim</a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              {% for i in facetofacecategory_list  %}
-              <li class="dropdown-item">
-                <div class="d-flex justify-content-beetwen dropend">
-                  <a  data-mdb-dropdown-auto-close="False">{{ i.title }}</a>
-                  <a class=" btn-secondary  dropdown-toggle dropdown-toggle-split"  data-mdb-dropdown-init  data-mdb-ripple-init  aria-expanded="false"   data-mdb-dropdown-auto-close="False"  ></a> 
-                  <ul class="dropdown-menu">
-                    {% for i in province_list %}
+          <ul style="list-style: none;">
+            <li class="nav-item dropdown">
+              <a data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button" aria-expanded="false">Yüz Yüze Eğitim</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for i in facetofacecategory_list  %}
+                <li class="dropdown-item">
+                  <div class="d-flex justify-content-beetwen dropend">
+                    <a  data-mdb-dropdown-auto-close="False">{{ i.title }}</a>
+                    <a class=" btn-secondary  dropdown-toggle dropdown-toggle-split"  data-mdb-dropdown-init  data-mdb-ripple-init  aria-expanded="false"   data-mdb-dropdown-auto-close="False"  ></a> 
+                    <ul class="dropdown-menu">
+                      {% for i in province_list %}
                       <li class="dropdown-item"  style="list-style: none;">
                         <a href="{% url 'allkursPage3' i.islug %}">{{ i.title }}</a>
                       </li>
-                    {% endfor %}
-                  </ul>
-                </div>
-              </li>
-            {% endfor %}
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </li>
           </ul>
-        </li>
-      
+            
+            
+            
+            
+            
+            
+            <!-- ONLİNE KATEGORİ -->
+          <ul style="list-style: none;">
+            <li class="nav-item dropdown">
+              <a  data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button" aria-expanded="false">Online Eğitim</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for i in onlinecategory_list  %}
+                <li class="">
+                  <a class="dropdown-item text-center" href="{% url 'allkursPage2' i.yslug %}">{{ i.title }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+            </li>
+          </ul>
 
-        
-        
-        
-
-        <!-- ONLİNE KATEGORİ -->
-
-          <li class="nav-item dropdown">
-            <a  data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button" aria-expanded="false">Online Eğitim</a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              {% for i in onlinecategory_list  %}
-              <li class="">
-                <a class="dropdown-item text-center" href="{% url 'allkursPage2' i.yslug %}">{{ i.title }}</a>
-              </li>
-              {% endfor %}
-            </ul>
-          </li>
-        </ul>
  
       
 
@@ -104,26 +107,12 @@
           </div>
           <!-- Avatar -->
           <div class="dropdown">
-            <a
-              data-mdb-dropdown-init
-              class="dropdown-toggle d-flex align-items-center hidden-arrow"
-              href="#"
-              id="navbarDropdownMenuAvatar"
-              role="button"
-              aria-expanded="false"
-            >
-            <img src="{% if request.user.usermy.profile_image %}{{ request.user.usermy.profile_image.url }}{% else %}{% static 'appMy/static/img/images.png' %}{% endif %}"  class="rounded-circle" height="25" loading="lazy" alt="">
+            <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"  id="navbarDropdownMenuAvatar"  role="button"  aria-expanded="false" >
+              <img src="{% if request.user.usermy.profile_image %}{{ request.user.usermy.profile_image.url }}{% else %}{% static 'appMy/static/img/images.png' %}{% endif %}"  class="rounded-circle" height="25" loading="lazy" alt="">
             </a>
-            <ul
-              class="dropdown-menu dropdown-menu-end"
-              aria-labelledby="navbarDropdownMenuAvatar"
-            >
-              <li>
-                <a class="dropdown-item" href="#">Profil</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="{% url 'hesapPage' %}">Ayarlar</a>
-              </li>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+              <li><a class="dropdown-item" href="#">Profil</a></li>
+              <li><a class="dropdown-item" href="{% url 'hesapPage' %}">Ayarlar</a></li>
             </ul>
           </div>
         {% else %}

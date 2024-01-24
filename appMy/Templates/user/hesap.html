@@ -117,8 +117,8 @@
                             <div>
                                 <a class="my-3 fw-bold" href="#">Profil Resmi:</a>
                             </div>
-                                <img style="width: 100px; height: 100px;"  src="{{ request.user.usermy.profile_image.url }}" alt="">  
-                                <!-- Girişli olan kullanının fotografını görüntüler -->
+                            <img src="{% if request.user.usermy.profile_image %}{{ request.user.usermy.profile_image.url }}{% else %}{% static 'appMy/static/img/images.png' %}{% endif %}"  class="rounded-circle" height="25" loading="lazy" alt="">
+                            <!-- Girişli olan kullanının fotografını görüntüler -->
                         </div>
                         <!-- Modal Profil Resmi Change --> 
                         <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

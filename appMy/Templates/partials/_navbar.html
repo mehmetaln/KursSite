@@ -112,12 +112,7 @@
               role="button"
               aria-expanded="false"
             >
-              <img
-                src="{{ request.user.usermy.profile_image.url }}"
-                class="rounded-circle"
-                height="25"
-                loading="lazy"
-              />
+            <img src="{% if request.user.usermy.profile_image %}{{ request.user.usermy.profile_image.url }}{% else %}{% static 'appMy/static/img/images.png' %}{% endif %}"  class="rounded-circle" height="25" loading="lazy" alt="">
             </a>
             <ul
               class="dropdown-menu dropdown-menu-end"

@@ -9,7 +9,7 @@ class Usermy(models.Model):
     user = models.OneToOneField(User, verbose_name=("Kullanıcı"), on_delete=models.CASCADE)
     tel = models.CharField(("Telefon"), max_length=50, default = "-")
     address = models.TextField(("Adres"), blank =True)
-    profile_image = models.ImageField(("Profil Resmi"), upload_to="profil", max_length=200)
+    profile_image = models.ImageField(("Profil Resmi"), upload_to="profil", max_length=200, default='appMy/static/image/images.png')
     user_active = models.CharField(("Kullancı Dogrulama Linki"), max_length=50, default=0) # Kullanıcya email aracılı ile link göndermek için kullandıgımız kısım
 
     def __str__(self):

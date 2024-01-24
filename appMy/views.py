@@ -63,31 +63,50 @@ def detailPage(request,kid):
         text = request.POST.get("text")
         
         if submit =="commentSubmit":
-            if kurs_list.exists(): # ilgili bir kurs varmı kontrol eder
-                kurs = kurs_list.first()      
-                comment = Comment(text=text, kurs= kurs, user =request.user)
-                comment.save()
+            if request.user:
+                if kurs_list.exists(): # ilgili bir kurs varmı kontrol eder
+                    kurs = kurs_list.first()      
+                    comment = Comment(text=text, kurs= kurs, user =request.user)
+                    comment.save()
+                    
+                    kurs.comment_num +=1
+                    kurs.save()
+                else:
+                    messages.error(request,"Kurs Bulunamadı")
+                    return redirect("detailPage")
+            else:
+                messages.warning(request,"Lütfen giriş yapınız.")
+                return redirect("loginPage")
                 
-                kurs.comment_num +=1
-                kurs.save()
         elif submit =="likeSubmit":
-            if kurs_list.exists(): # kurs listesini kontrol et bu formu gönderen bir kurs varmı diye
-                kurs =kurs_list.first()#first(), bir QuerySet'ten ilk öğeyi (veya belirli bir sıra veya filtreleme kriterine göre ilk öğeyi) almak için kullanılan bir metodudur.
+            if request.user:
+                if kurs_list.exists(): # kurs listesini kontrol et bu formu gönderen bir kurs varmı diye
+                    kurs =kurs_list.first()#first(), bir QuerySet'ten ilk öğeyi (veya belirli bir sıra veya filtreleme kriterine göre ilk öğeyi) almak için kullanılan bir metodudur.
 
-                kurs.likes += 1
-                kurs.save()
+                    kurs.likes += 1
+                    kurs.save()
+                else:
+                    messages.error(request,"Kurs Bulunamadı")
+            else:
+                messages.warning(request, "Lütfen giriş yapınız.")
+                return redirect("loginPage")
+
         elif submit == "sepetSubmit":
-            if kurs_list.exists():
-                kurs= kurs_list.first()
-                
-                adet = int(request.POST.get("adet"))
-                toplam = adet * float(kurs.price)
-                
-                sepet = Sepet(kurs=kurs, user=request.user, adet=adet, toplam=toplam) 
-                sepet.save()
-                return redirect("sepetPage")
-
-
+            if request.user:
+                if kurs_list.exists():
+                    kurs= kurs_list.first()
+                    
+                    adet = int(request.POST.get("adet"))
+                    toplam = adet * float(kurs.price)
+                    
+                    sepet = Sepet(kurs=kurs, user=request.user, adet=adet, toplam=toplam) 
+                    sepet.save()
+                    return redirect("sepetPage")
+                else:
+                    messages.error(request,"Kurs Bulunamadı")
+            else:
+                messages.warning(request,"Lütfen Giriş Yapınız")
+                return redirect("loginPage")
     context = {
         "comment_list":comment_list,
         "kurs_list": kurs_list,
@@ -151,12 +170,18 @@ def allkursPage(request, oslug=None, pslug=None, fslug=None):
 
     elif pslug:
         kurs_list = kurs_list.filter(province__islug=pslug)
+    else:
+        messages.warning(request,"ilgili kurs bulunamadı")
+        return redirect("indexPage")
 
     query = request.GET.get("query")
     print("Arama Sorgusu:", query)
     if query:
         kurs_list = kurs_list.filter(Q(title__icontains=query))
-    
+    else:
+        messages.warning(request,"ilgili kurs bulunamadı")
+        return redirect("indexPage")
+
         
     
     onlinecategory_list = OnlineCategory.objects.all()
@@ -172,72 +197,6 @@ def allkursPage(request, oslug=None, pslug=None, fslug=None):
 
     return render(request, "allkurs.html", context)
 
-# def allkursPage(request, oslug=None, pslug=None, fslug=None):
-    kurs_list = Kurs.objects.all().order_by('-id')
-
-    if oslug:
-        kurs_list = kurs_list.filter(onlinecategory__yslug=oslug)
-
-    elif fslug:
-        kurs_list = kurs_list.filter(facetofacecategory__tslug=fslug)
-
-    elif pslug:
-        kurs_list = kurs_list.filter(province__islug=pslug)
-
-    onlinecategory_list = OnlineCategory.objects.all()
-    facetofacecategory_list = FacetoFaceCategory.objects.all()
-    province_list = Province.objects.all()
-
-    category_province_options_dict = {}
-    for category in facetofacecategory_list:
-        province_options = category.province_options.all()
-        category_province_options_dict[category] = province_options
-
-    context = {
-        "kurs_list": kurs_list,
-        "onlinecategory_list": onlinecategory_list,
-        "facetofacecategory_list": facetofacecategory_list,
-        "province_list": province_list,
-        "category_province_options_dict": category_province_options_dict,
-    }
-
-    return render(request, "allkurs.html", context)
-
-    kurs_list = Kurs.objects.all().order_by('-id')
-
-    if oslug:
-        kurs_list = kurs_list.filter(onlinecategory__yslug=oslug)
-
-    elif fslug:
-        kurs_list = kurs_list.filter(facetofacecategory__tslug=fslug)
-
-    elif pslug:
-        kurs_list = kurs_list.filter(province__islug=pslug)
-
-    query = request.GET.get("query")
-    print("Arama Sorgusu:", query)
-    if query:
-        kurs_list = kurs_list.filter(Q(title__icontains=query))
-    
-    onlinecategory_list = OnlineCategory.objects.all()
-    facetofacecategory_list = FacetoFaceCategory.objects.all()
-    province_list = Province.objects.all()
-
-    category_province_options_dict = {}
-    for category in facetofacecategory_list:
-        province_options = category.province_options.all()
-        print(f"Kategori: {category.title}, İl Seçenekleri: {[province.title for province in province_options]}")
-        category_province_options_dict[category] = province_options
-
-    context = {
-        "kurs_list": kurs_list,
-        "onlinecategory_list": onlinecategory_list,
-        "facetofacecategory_list": facetofacecategory_list,
-        "province_list": province_list,
-        "category_province_options_dict": category_province_options_dict,
-    }
-
-    return render(request, "allkurs.html", context)
 
 
 def emailPage(request):

@@ -54,15 +54,14 @@ def registerPage(request):
         boolnum = boolup = False
         boolchar = True
         if fname and lname and email and username and password1 and password2:
-            char = ["*;:@?ı/"]    
+        
             if password1 == password2:
                 for i in password1:
                     if i.isupper():
                         boolup = True
                     if i.isnumeric():
                         boolnum = True
-                    if i in char:
-                        boolchar = False
+
                 if boolup and boolnum  and boolchar and len(password1)>=6:
                     if not User.objects.filter(username = username).exists():                            
                             random_link =get_random_string(44)  # random linkimizin string kısmı 

@@ -63,50 +63,31 @@ def detailPage(request,kid):
         text = request.POST.get("text")
         
         if submit =="commentSubmit":
-            if request.user:
-                if kurs_list.exists(): # ilgili bir kurs varmı kontrol eder
-                    kurs = kurs_list.first()      
-                    comment = Comment(text=text, kurs= kurs, user =request.user)
-                    comment.save()
-                    
-                    kurs.comment_num +=1
-                    kurs.save()
-                else:
-                    messages.error(request,"Kurs Bulunamadı")
-                    return redirect("detailPage")
-            else:
-                messages.warning("Lütfen giriş yapınız.")
-                return redirect("loginPage")
+            if kurs_list.exists(): # ilgili bir kurs varmı kontrol eder
+                kurs = kurs_list.first()      
+                comment = Comment(text=text, kurs= kurs, user =request.user)
+                comment.save()
                 
+                kurs.comment_num +=1
+                kurs.save()
         elif submit =="likeSubmit":
-            if request.user:
-                if kurs_list.exists(): # kurs listesini kontrol et bu formu gönderen bir kurs varmı diye
-                    kurs =kurs_list.first()#first(), bir QuerySet'ten ilk öğeyi (veya belirli bir sıra veya filtreleme kriterine göre ilk öğeyi) almak için kullanılan bir metodudur.
+            if kurs_list.exists(): # kurs listesini kontrol et bu formu gönderen bir kurs varmı diye
+                kurs =kurs_list.first()#first(), bir QuerySet'ten ilk öğeyi (veya belirli bir sıra veya filtreleme kriterine göre ilk öğeyi) almak için kullanılan bir metodudur.
 
-                    kurs.likes += 1
-                    kurs.save()
-                else:
-                    messages.error(request,"Kurs Bulunamadı")
-            else:
-                messages.warning( "Lütfen giriş yapınız.")
-                return redirect("loginPage")
-
+                kurs.likes += 1
+                kurs.save()
         elif submit == "sepetSubmit":
-            if request.user:
-                if kurs_list.exists():
-                    kurs= kurs_list.first()
-                    
-                    adet = int(request.POST.get("adet"))
-                    toplam = adet * float(kurs.price)
-                    
-                    sepet = Sepet(kurs=kurs, user=request.user, adet=adet, toplam=toplam) 
-                    sepet.save()
-                    return redirect("sepetPage")
-                else:
-                    messages.error(request,"Kurs Bulunamadı")
-            else:
-                messages.warning("Lütfen Giriş Yapınız")
-                return redirect("loginPage")
+            if kurs_list.exists():
+                kurs= kurs_list.first()
+                
+                adet = int(request.POST.get("adet"))
+                toplam = adet * float(kurs.price)
+                
+                sepet = Sepet(kurs=kurs, user=request.user, adet=adet, toplam=toplam) 
+                sepet.save()
+                return redirect("sepetPage")
+
+
     context = {
         "comment_list":comment_list,
         "kurs_list": kurs_list,
@@ -170,18 +151,12 @@ def allkursPage(request, oslug=None, pslug=None, fslug=None):
 
     elif pslug:
         kurs_list = kurs_list.filter(province__islug=pslug)
-    else:
-        messages.warning(request,"ilgili kurs bulunamadı")
-        return redirect("indexPage")
 
     query = request.GET.get("query")
     print("Arama Sorgusu:", query)
     if query:
         kurs_list = kurs_list.filter(Q(title__icontains=query))
-    else:
-        messages.warning(request,"ilgili kurs bulunamadı")
-        return redirect("indexPage")
-
+    
         
     
     onlinecategory_list = OnlineCategory.objects.all()
@@ -196,6 +171,7 @@ def allkursPage(request, oslug=None, pslug=None, fslug=None):
     }
 
     return render(request, "allkurs.html", context)
+
 
 
 

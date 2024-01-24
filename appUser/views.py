@@ -64,9 +64,7 @@ def registerPage(request):
                     if i in char:
                         boolchar = False
                 if boolup and boolnum  and boolchar and len(password1)>=6:
-                    if not User.objects.filter(username = username).exists():
-                        if not User.objects.filter(email =email).exists():
-                            
+                    if not User.objects.filter(username = username).exists():                            
                             random_link =get_random_string(44)  # random linkimizin string kısmı 
                             emaillink = "http://"+request.get_host()+"/emailActive/"+random_link #request.get_host methodu bize girişli olan kullanıcın host bilgilerini verir
                             # diger kısımlar https gibi bizim ell ile yazdıgımız linklerin kısımları
@@ -90,9 +88,6 @@ def registerPage(request):
                             
                             
                             messages.success(request,"Kayıt işlemlerinin tamamlanması için lütfen maila adresinizi onaylayınjz")
-                            return redirect("loginPage")
-                        else:
-                            messages.error(request,"Bu e-posta adresi ile kayıtlı bir üye var.")
                     else:
                         messages.error(request,"Bu Kullanıcı Adı ile kayıtlı bir üye var.")
                 else:

@@ -108,7 +108,7 @@
           <!-- Avatar -->
           <div class="dropdown">
             <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"  id="navbarDropdownMenuAvatar"  role="button"  aria-expanded="false" >
-              <img src="{% if request.user.usermy.profile_image %}{{ request.user.usermy.profile_image.url }}{% else %}{% static 'appMy/static/img/images.png' %}{% endif %}"  class="rounded-circle" height="25" loading="lazy" alt="">
+                <img src="{% if request.user.usermy.profile_image %}{{ request.user.usermy.profile_image.url }}{% else %}{% static 'appMy/static/img/images.png' %}{% endif %}"  class="rounded-circle" height="25px" width="25px" loading="lazy" alt="">
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
               <li><a class="dropdown-item" href="#">Profil</a></li>

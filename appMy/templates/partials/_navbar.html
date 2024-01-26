@@ -1,0 +1,158 @@
+<!-- Navbar -->
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+    <!-- Container wrapper -->
+    <div class="container">
+      <!-- Toggle button -->
+      <button
+        data-mdb-collapse-init
+        class="navbar-toggler"
+        type="button"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar brand -->
+        <div class="navbar-brand mt-2 mt-lg-0" href="#">
+          <a class="text-black " style="font-size: xx-large;" href="/">COURSERA</a>
+        </div>
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'allkursPage' %}">Tüm Eğitimler</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contentPage' %}">Coursera'da Eğitim Verin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'siparisPage' %}">Satın Aldıklarım</a>
+          </li>
+                 <!-- FACE TO FACE CAREGORY -->
+          <ul style="list-style: none;">
+            <li class="nav-item dropdown">
+              <a data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button" aria-expanded="false">Yüz Yüze Eğitim</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for i in facetofacecategory_list  %}
+                <li class="dropdown-item">
+                  <div class="d-flex justify-content-beetwen dropend">
+                    <a  data-mdb-dropdown-auto-close="False">{{ i.title }}</a>
+                    <a class=" btn-secondary  dropdown-toggle dropdown-toggle-split"  data-mdb-dropdown-init  data-mdb-ripple-init  aria-expanded="false"   data-mdb-dropdown-auto-close="False"  ></a> 
+                    <ul class="dropdown-menu">
+                      {% for i in province_list %}
+                      <li class="dropdown-item"  style="list-style: none;">
+                        <a href="{% url 'allkursPage3' i.islug %}">{{ i.title }}</a>
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </li>
+          </ul>
+            
+            
+            
+            
+            
+            
+            <!-- ONLİNE KATEGORİ -->
+          <ul style="list-style: none;">
+            <li class="nav-item dropdown">
+              <a  data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button" aria-expanded="false">Online Eğitim</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for i in onlinecategory_list  %}
+                <li class="">
+                  <a class="dropdown-item text-center" href="{% url 'allkursPage2' i.yslug %}">{{ i.title }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+            </li>
+          </ul>
+
+ 
+      
+
+
+
+
+      </div>
+      
+
+        <!-- Notifications -->
+        {% if request.user.is_authenticated %}
+        <a class="text-primary mx-3">{{request.user }}</a>         
+        <a href="logout/user/" class="text-danger me-3">
+          Çıkış
+        </a> 
+        <div class="d-flex align-items-center">
+          <!-- Icon -->
+          <a class="text-reset me-3" href="{% url 'sepetPage' %}">
+            <i class="fas fa-shopping-cart"></i>
+          </a>        
+          <div class="dropdown"><a  data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow"  href="#"  id="navbarDropdownMenuLink" role="button" aria-expanded="false">
+              <i class="fas fa-bell"></i><span class="badge rounded-pill badge-notification bg-danger"></span> </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
+              <li>
+                <a class="dropdown-item " href="#">Some news</a>
+              </li>
+            </ul>
+          </div>
+          <!-- Avatar -->
+          <div class="dropdown">
+            <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"  id="navbarDropdownMenuAvatar"  role="button"  aria-expanded="false" >
+                <img src="{% if request.user.usermy.profile_image %}{{ request.user.usermy.profile_image.url }}{% else %}{% static 'appMy/static/img/images.png' %}{% endif %}"  class="rounded-circle" height="25px" width="25px" loading="lazy" alt="">
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+              <li><a class="dropdown-item" href="#">Profil</a></li>
+              <li><a class="dropdown-item" href="{% url 'hesapPage' %}">Ayarlar</a></li>
+            </ul>
+          </div>
+        {% else %}
+        <div class="d-flex align-items-center">
+          <!-- Icon -->
+          <!-- <a class="text-reset me-3" href="#">
+            <i class="fas fa-shopping-cart"></i>
+          </a>        
+          <div class="dropdown"><a  data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow"  href="#"  id="navbarDropdownMenuLink" role="button" aria-expanded="false">
+              <i class="fas fa-bell"></i><span class="badge rounded-pill badge-notification bg-danger"></span> </a>
+          </div> -->
+          <!-- Avatar -->
+          <div class="dropdown">
+            <a 
+         class=" btn btn-primary" href="{% url 'loginPage' %}"
+            > Giriş
+             </a>
+          </div>
+        {% endif %}   
+      </div>
+    </div>
+  </div> 
+</nav>
+<div  class="container">
+  <div class="input-group container my-3 mx-3"style="display: flex; justify-content: end; width: 100%; height: auto;" >
+    <div class="form-outline  " style="width:300px ; border: 2px solid gray; border-radius: 20px;"  data-mdb-input-init>
+      <form method ="GET" action="{% url 'allkursPage' %}">
+        <input name="query" type="search" id="form1" class="form-control"  />
+        <label class="form-label" for="form1">Search</label>
+      </div>
+      <button type="submit" class="btn btn-primary" style="border-start-end-radius: 10px;" data-mdb-ripple-init>
+        <i class="fas fa-search"></i>
+      </button>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+  
+

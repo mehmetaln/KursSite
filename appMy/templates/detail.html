@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+    
+<main>
+    <div class="container">
+        
+        {% for i in kurs_list %}
+        <section class="  d-flex flex-column gap-4" style="height: auto">
+
+            <div><img style="height: auto; width:100% ;" src="{{ i.image.url }}" alt=""></div>
+            <div class="">
+                <div class="d-flex justify-content-beetwen" >
+                    <h2>{{ i.title }}</h2>
+                </div>
+                <div class=" d-flex justify-content-end text-primary fw-bold fs-5">{{ i.user }}</div>
+            </div>
+            <div class="text-black">{{ i.text }}</div>   
+            <div style="display: flex; justify-content:space-between ;">
+                <div class="d-flex justify-content-beetwen " style="width: 100%; height: auto; position: relative;" >
+                    <div class="">
+                        <a href="{% url 'detailPage' i.id %}" class="card-link text-danger"><i class="fa-solid fa-heart"></i>{{ i.likes}} </a>
+                        <a  href="{% url 'detailPage' i.id %}" class="card-link mx-3 text-danger"><i class="fa-solid fa-comments"></i>{{ i.comment_num}} </a>
+                         <form method="POST">
+                            {% csrf_token %}
+                            <button type="submit" name="submit" value="likeSubmit" class=" my-3 btn btn-secondary"><i class="fa-solid fa-thumbs-up"></i></button>
+                        </form>
+                    </div>
+                    <div class="" style="position: absolute; right: 0;">
+                        <form class="d-flex gap-2 " style="width: 200px;"  method="POST">
+                            {% csrf_token %}
+                            <input class="form-control text-nowrap" type="number" name="adet" value="1" min="1" max="5">
+                            <button class="btn btn-primary text-nowrap" name="submit" value="sepetSubmit" type="submit">Sepete Ekle</button>
+                        </form> 
+                    </div>
+                </div>
+                <div>
+                    
+                    <div class="text-black fs-5">{{ i.date_now }}</div>
+                </div>
+            </div>
+        </section>        
+        {% endfor %}
+        <form method='POST' enctype="multipart/form-data" > 
+            <!-- dışarıdan bir yükleme veya yorum gelceği zmaan enxtype kullnamalıyız -->
+            {% csrf_token %}
+            <div style="width: 100%; height: 60px;" class="d-flex my-5   justify-content-beetwen">
+                <img src="{% if request.user.usermy.profile_image %}{{ request.user.usermy.profile_image.url }}{% else %}{% static 'appMy/static/img/images.png' %}{% endif %}"  class="rounded-circle" height="25" loading="lazy" alt="">
+                <div class="mx-2"><textarea name="text" style="width: 1100px; height: 75px;" placeholder="Yorum yapınız..." cols="30" rows="10"></textarea></div>
+                <div style="width: 150px; height: 150px;">  <button  class="btn btn-success" name="submit" value="commentSubmit" type="submit">Paylaş</button></div>
+
+            </div>
+        </form>
+        <section>
+            <div class="row my-5">
+                <div class="col-6">          
+                    <h3>Yorumlar</h3>           
+                    <hr>
+                    {% for i in comment_list  %}
+                    <div class="row">
+                        <div class="col-2">
+                            <img src="{% if request.user.usermy.profile_image %}{{ request.user.usermy.profile_image.url }}{% else %}{% static 'appMy/static/img/images.png' %}{% endif %}"  class="rounded-circle" height="25" loading="lazy" alt="">
+                        </div>
+                        <div class="col-10 ">
+                            <div class="fw-bold d-flex justify-content-beetwen">
+                            <small class="text-primary">{{ i.user }}</small>
+                            <small> <i class="fa fa-clock-o"></i> {{ i.date_now }}</small>   
+                            </div>
+                            <div class="my-2"> <p class="comment-text">{{ i.text }}</p> </div>
+                            <div class="">
+                                <button class="btn btn-secondary"><i class="fa-solid fa-thumbs-up"></i></button>
+                                <button class="mx-3  btn btn-secondary"> <i class="fa-solid fa-thumbs-down"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                  
+                    </div>
+                    <div class="col-6">
+                        <div class="row ">
+                            <h2>İlginizi Çekebilecek Bazı Kurslar</h2>
+                            <hr>
+                            {% for i in kurs_random_list %}
+                            <div class="col-4" style="margin-right: 6rem; margin-top: 1rem;">
+                              <div class="" style="width: 18rem;">
+                                <a href="{% url 'detailPage' i.id %}"><img src="{{i.image.url}}" class= "card-img-top"/></a>
+                                <div class="card-body my-2">
+                                  <h6 class="card-title fw-bold"><a href="{% url 'detailPage' i.id %}">{{ i.title | truncatechars:75}}</a></h6>
+                                </div>
+                               <div style="display: block; justify-content: start;">
+                                </div>
+                                <div class="card-body">
+                                    <a href="{% url 'detailPage' i.id %}" class="card-link text-danger"><i class="fa-solid fa-heart"></i>{{ i.likes.count}} </a>
+                                </div>
+                                <div class="card-body">
+                                  <a href="{% url 'detailPage' i.id %}" class="card-link text-black">{{ i.price }}  ₺ </a>
+                                </div>
+                                <div class="card-body">
+                                  <a href="{% url 'detailPage' i.id %}" class="card-link text-black">{{ i.category }}</a>
+                                </div>
+                                <div class="card-body">
+                                  <a href="{% url 'detailPage' i.id %}" class="card-link text-primary">{{ i.user}}</a>
+                                </div>
+                                <div class="card-body">
+                                  <a href="{% url 'detailPage' i.id %}" class="card-link text-primary">{{ i.comment_num}}</a>
+                                </div>
+                              </div>
+                            </div>
+                            {% endfor %}
+                            <hr>
+                          </div>
+                    </div>
+            </div>
+        </section>
+
+
+
+
+    </div>
+</main>
+
+
+
+
+{% endblock body %}
+    

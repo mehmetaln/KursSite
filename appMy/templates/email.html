@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+    
+    <div class="container">
+        <form method="POST">
+        <div class="d-flex flex-column gap-2 my-5  ">
+        <h1 class="text-success">Email Gönder</h1>
+            {% csrf_token %}
+            <div><input type="text" placeholder="Konu" style="width: 50%;" name="konu"  ></div>
+            <div><textarea name="mesaj" style="width: 100%;" placeholder="Mesajınız" cols="30" rows="10"></textarea></div>
+            <button class="btn btn-success" type="submit">Gönder</button>
+        </div>
+    </div>
+</form>
+
+{% endblock body %}
+    
